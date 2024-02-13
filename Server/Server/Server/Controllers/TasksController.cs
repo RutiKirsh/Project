@@ -7,5 +7,6 @@ namespace Server.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
+
     }
 }
