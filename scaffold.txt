@@ -1,0 +1,1 @@
+Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=H:\Project\Project\DB\Notnim_yad.mdf;Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer –Context NotnimYadContext -OutputDir Models  -Force -NoOnConfiguring
