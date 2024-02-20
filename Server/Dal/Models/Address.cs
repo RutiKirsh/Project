@@ -12,4 +12,8 @@ public partial class Address
     public string Street { get; set; }
 
     public string Building { get; set; }
+
+    public virtual ICollection<Child> Children { get; set; } = new List<Child>();
+
+    public virtual ICollection<Volunteer> Volunteers { get; set; } = new List<Volunteer>();
 }

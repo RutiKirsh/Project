@@ -13,5 +13,11 @@ public partial class User
 
     public string Type { get; set; }
 
-    public string KeyId { get; set; }
+    public string ChildId { get; set; }
+
+    public string VolunteerId { get; set; }
+
+    public virtual Child Child { get; set; }
+
+    public virtual Volunteer Volunteer { get; set; }
 }

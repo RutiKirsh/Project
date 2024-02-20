@@ -20,4 +20,8 @@ public partial class Task
     public string Type { get; set; }
 
     public string Comments { get; set; }
+
+    public virtual Child Child { get; set; }
+
+    public virtual Volunteer Volunteer { get; set; }
 }

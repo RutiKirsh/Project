@@ -62,6 +62,11 @@ public partial class NotnimYadContext : DbContext
             entity.Property(e => e.Phone)
                 .IsRequired()
                 .HasMaxLength(10);
+
+            entity.HasOne(d => d.Address).WithMany(p => p.Children)
+                .HasForeignKey(d => d.AddressId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ChildrenAddress");
         });
 
         modelBuilder.Entity<Task>(entity =>
@@ -80,24 +85,43 @@ public partial class NotnimYadContext : DbContext
             entity.Property(e => e.VolunteerId)
                 .HasMaxLength(10)
                 .HasColumnName("VolunteerID");
+
+            entity.HasOne(d => d.Child).WithMany(p => p.Tasks)
+                .HasForeignKey(d => d.ChildId)
+                .HasConstraintName("FK_TasksChildren");
+
+            entity.HasOne(d => d.Volunteer).WithMany(p => p.Tasks)
+                .HasForeignKey(d => d.VolunteerId)
+                .HasConstraintName("FK_TasksVolunteers");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07B70976C0");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC0710B424F4");
 
+            entity.Property(e => e.ChildId)
+                .HasMaxLength(10)
+                .HasColumnName("ChildID");
             entity.Property(e => e.Email)
                 .IsRequired()
                 .HasMaxLength(255);
-            entity.Property(e => e.KeyId)
-                .HasMaxLength(10)
-                .HasColumnName("KeyID");
             entity.Property(e => e.Password)
                 .IsRequired()
                 .HasMaxLength(50);
             entity.Property(e => e.Type)
                 .IsRequired()
                 .HasMaxLength(500);
+            entity.Property(e => e.VolunteerId)
+                .HasMaxLength(10)
+                .HasColumnName("VolunteerID");
+
+            entity.HasOne(d => d.Child).WithMany(p => p.Users)
+                .HasForeignKey(d => d.ChildId)
+                .HasConstraintName("FK_UsersChilds");
+
+            entity.HasOne(d => d.Volunteer).WithMany(p => p.Users)
+                .HasForeignKey(d => d.VolunteerId)
+                .HasConstraintName("FK_UsersVolunteers");
         });
 
         modelBuilder.Entity<Volunteer>(entity =>
@@ -117,6 +141,11 @@ public partial class NotnimYadContext : DbContext
             entity.Property(e => e.Phone)
                 .IsRequired()
                 .HasMaxLength(10);
+
+            entity.HasOne(d => d.Address).WithMany(p => p.Volunteers)
+                .HasForeignKey(d => d.AddressId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_VolunteersAddress");
         });
 
         OnModelCreatingPartial(modelBuilder);
