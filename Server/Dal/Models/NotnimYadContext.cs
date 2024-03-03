@@ -15,11 +15,11 @@ public partial class NotnimYadContext : DbContext
 
     public virtual DbSet<Child> Children { get; set; }
 
-    public virtual DbSet<Task> Tasks { get; set; }
-
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Volunteer> Volunteers { get; set; }
+
+    public virtual DbSet<VolunteeringTask> VolunteeringTasks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -67,32 +67,6 @@ public partial class NotnimYadContext : DbContext
                 .HasForeignKey(d => d.AddressId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ChildrenAddress");
-        });
-
-        modelBuilder.Entity<Task>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Tasks__3214EC0753E2FE6B");
-
-            entity.Property(e => e.ChildId)
-                .HasMaxLength(10)
-                .HasColumnName("ChildID");
-            entity.Property(e => e.Comments).HasMaxLength(4000);
-            entity.Property(e => e.Date).HasColumnType("datetime");
-            entity.Property(e => e.End).HasColumnType("datetime");
-            entity.Property(e => e.Type)
-                .IsRequired()
-                .HasMaxLength(500);
-            entity.Property(e => e.VolunteerId)
-                .HasMaxLength(10)
-                .HasColumnName("VolunteerID");
-
-            entity.HasOne(d => d.Child).WithMany(p => p.Tasks)
-                .HasForeignKey(d => d.ChildId)
-                .HasConstraintName("FK_TasksChildren");
-
-            entity.HasOne(d => d.Volunteer).WithMany(p => p.Tasks)
-                .HasForeignKey(d => d.VolunteerId)
-                .HasConstraintName("FK_TasksVolunteers");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -146,6 +120,32 @@ public partial class NotnimYadContext : DbContext
                 .HasForeignKey(d => d.AddressId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_VolunteersAddress");
+        });
+
+        modelBuilder.Entity<VolunteeringTask>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Voluntee__3214EC07398D892B");
+
+            entity.Property(e => e.ChildId)
+                .HasMaxLength(10)
+                .HasColumnName("ChildID");
+            entity.Property(e => e.Comments).HasMaxLength(4000);
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.End).HasColumnType("datetime");
+            entity.Property(e => e.Type)
+                .IsRequired()
+                .HasMaxLength(500);
+            entity.Property(e => e.VolunteerId)
+                .HasMaxLength(10)
+                .HasColumnName("VolunteerID");
+
+            entity.HasOne(d => d.Child).WithMany(p => p.VolunteeringTasks)
+                .HasForeignKey(d => d.ChildId)
+                .HasConstraintName("FK_TasksChildren");
+
+            entity.HasOne(d => d.Volunteer).WithMany(p => p.VolunteeringTasks)
+                .HasForeignKey(d => d.VolunteerId)
+                .HasConstraintName("FK_TasksVolunteers");
         });
 
         OnModelCreatingPartial(modelBuilder);

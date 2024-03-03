@@ -21,7 +21,7 @@ public partial class Volunteer
 
     public virtual Address Address { get; set; }
 
-    public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
-
     public virtual ICollection<User> Users { get; set; } = new List<User>();
+
+    public virtual ICollection<VolunteeringTask> VolunteeringTasks { get; set; } = new List<VolunteeringTask>();
 }
