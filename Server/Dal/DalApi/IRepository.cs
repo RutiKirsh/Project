@@ -10,8 +10,8 @@ public interface IRepository<T>
 {
     Task<List<T>> GetAllAsync();
     Task<T> GetSingleAsync(int id);
-    Task<T> PostAsync(int id, T entity);
-    Task<T> PutAsync(T item);
+    Task<T> PostAsync(T entity);
+    Task<T> PutAsync(int id, T item);
     Task<T> DeleteAsync(int id);
 
 }

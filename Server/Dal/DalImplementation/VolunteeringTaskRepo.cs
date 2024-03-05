@@ -16,18 +16,8 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
     {
         this.notnimYadContext = notnimYadContext;
     }
-
-    public async Task<VolunteeringTask> DeleteAsync(int id)
-    {
-          Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(x => x.Id == id);
-          if(volunteeringTask != null)
-          {
-              notnimYadContext.VolunteeringTasks.Remove(volunteeringTask);
-          }
-          notnimYadContext.SaveChanges();
-          return await volunteeringTask; 
-    }
-
+    //דרוש תיקון!!!
+    
     public async Task<List<VolunteeringTask>> GetAllAsync()
     {
         return await notnimYadContext.VolunteeringTasks.ToListAsync();
@@ -44,13 +34,26 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
         notnimYadContext.SaveChanges();
         return entity;
     }
-
+    //דרוש תיקון!!!
     public Task<VolunteeringTask> PutAsync(int id, VolunteeringTask item)
     {
         Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(v => v.Id == id);
-        if(volunteeringTask == null)
+       /* if(volunteeringTask == null)
         {
-
-        }
+            volunteeringTask = item.Comments;
+        }*/
+        return volunteeringTask;
     }
+
+    public async Task<VolunteeringTask> DeleteAsync(int id)
+    {
+        Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(x => x.Id == id);
+        /*if(volunteeringTask != null)
+        {
+            notnimYadContext.VolunteeringTasks.Remove(volunteeringTask);
+        }
+        notnimYadContext.SaveChanges();*/
+        return await volunteeringTask;
+    }
+
 }
