@@ -1,4 +1,5 @@
-﻿using Dal.DalApi;
+﻿using Common;
+using Dal.DalApi;
 using Dal.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,11 +17,11 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
     {
         this.notnimYadContext = notnimYadContext;
     }
-    //דרוש תיקון!!!
     
-    public async Task<List<VolunteeringTask>> GetAllAsync()
+    public async Task<PagedList<VolunteeringTask>> GetAllAsync(BaseQueryParams queryParams)
     {
-        return await notnimYadContext.VolunteeringTasks.ToListAsync();
+        var query = notnimYadContext.VolunteeringTasks.AsQueryable();
+        return await PagedList<VolunteeringTask>.ToPagedListAsync(query, queryParams.PageNumber, queryParams.PageSize);
     }
 
     public async Task<VolunteeringTask> GetSingleAsync(int id)
@@ -44,6 +45,7 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
         }*/
         return volunteeringTask;
     }
+    //דרוש תיקון!!!
 
     public async Task<VolunteeringTask> DeleteAsync(int id)
     {

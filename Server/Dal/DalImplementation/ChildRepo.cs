@@ -1,4 +1,5 @@
-﻿using Dal.DalApi;
+﻿using Common;
+using Dal.DalApi;
 using Dal.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,9 +17,10 @@ public class ChildRepo : IRepositoryLess<Child>
     {
         this.notnimYadContext = notnimYadContext;
     }
-    public async Task<List<Child>> GetAllAsync()
+    public async Task<PagedList<Child>> GetAllAsync(BaseQueryParams queryParams)
     {
-        return await notnimYadContext.Children.ToListAsync();
+        var query = notnimYadContext.Children.AsQueryable();
+        return await PagedList<Child>.ToPagedListAsync(query, queryParams.PageNumber, queryParams.PageSize);
     }
 
     public async Task<Child> GetSingleAsync(string id)

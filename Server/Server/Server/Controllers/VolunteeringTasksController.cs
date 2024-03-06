@@ -1,8 +1,10 @@
-﻿using Dal.DalApi;
+﻿using Common;
+using Dal.DalApi;
 using Dal.DalImplementation;
 using Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace Server.Controllers;
 
@@ -16,11 +18,11 @@ public class VolunteeringTasksController : ControllerBase
         this._volunteeringTasksRepository = repository;
     }
     [HttpGet]
-    public async Task<List<VolunteeringTask>> GetAllAsync()
+    public async Task<PagedList<VolunteeringTask>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
     {
-        return await _volunteeringTasksRepository.GetAllAsync();
+        return await _volunteeringTasksRepository.GetAllAsync(queryParams);
     }
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<VolunteeringTask> GetSingleAsync(int id)
     {
         return await _volunteeringTasksRepository.GetSingleAsync(id);
@@ -30,12 +32,12 @@ public class VolunteeringTasksController : ControllerBase
     {
         return await _volunteeringTasksRepository.PostAsync(entity);
     }
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<VolunteeringTask> PutAsync(int id, VolunteeringTask item)
     {
         return await _volunteeringTasksRepository.PutAsync(id, item);
     }
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<VolunteeringTask> DeleteAsync(int id)
     {
         return await _volunteeringTasksRepository.DeleteAsync(id);

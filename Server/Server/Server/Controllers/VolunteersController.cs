@@ -1,4 +1,5 @@
-﻿using Dal.DalApi;
+﻿using Common;
+using Dal.DalApi;
 using Dal.DalImplementation;
 using Dal.Models;
 using Microsoft.AspNetCore.Http;
@@ -13,16 +14,16 @@ public class VolunteersController : ControllerBase
     IRepositoryLess<Volunteer> _volunteer;
 
     [HttpGet]
-    public async Task<List<Volunteer>> GetAllAsync()
+    public async Task<PagedList<Volunteer>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
     {
-        return await _volunteer.GetAllAsync();
+        return await _volunteer.GetAllAsync(queryParams);
     }
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<Volunteer> GetSingleAsync(string id)
     {
         return await _volunteer.GetSingleAsync(id);
     }
-    [HttpPut]
+    [HttpPut("{id}")]
     public Task<Volunteer> PutAsync(int id, Volunteer item)
     {
         return _volunteer.PutAsync(id, item);

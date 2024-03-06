@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{C99F358E-3DFA-4942-99CE-7858CF0DD8A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{C99F358E-3DFA-4942-99CE-7858CF0DD8A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bl", "..\Bl\Bl.csproj", "{F5136229-C65D-457F-84AD-9F21E810BB1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bl", "..\Bl\Bl.csproj", "{F5136229-C65D-457F-84AD-9F21E810BB1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal", "..\Dal\Dal.csproj", "{5E126A1D-14C1-4202-A4E2-44B5E7756738}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal", "..\Dal\Dal.csproj", "{5E126A1D-14C1-4202-A4E2-44B5E7756738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{80EFF47B-605E-43E6-9233-15D8BDE9EFCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5E126A1D-14C1-4202-A4E2-44B5E7756738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E126A1D-14C1-4202-A4E2-44B5E7756738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E126A1D-14C1-4202-A4E2-44B5E7756738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80EFF47B-605E-43E6-9233-15D8BDE9EFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80EFF47B-605E-43E6-9233-15D8BDE9EFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80EFF47B-605E-43E6-9233-15D8BDE9EFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80EFF47B-605E-43E6-9233-15D8BDE9EFCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
