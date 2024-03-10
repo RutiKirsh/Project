@@ -4,5 +4,5 @@ import { allReducers } from "./reducers";
 const store = createStore(
     allReducers
 );
- store.getState();
- export default store;
+store.getState();
+export default store;

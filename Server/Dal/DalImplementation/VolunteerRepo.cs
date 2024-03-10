@@ -31,7 +31,7 @@ public class VolunteerRepo : IRepositoryLess<Volunteer>
     public async Task<Volunteer> PostAsync(Volunteer entity)
     {
         notnimYadContext.Volunteers.Add(entity);
-        notnimYadContext.SaveChanges();
+        await notnimYadContext.SaveChangesAsync();
         return entity;
     }
 

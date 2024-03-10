@@ -32,10 +32,9 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
     public async Task<VolunteeringTask> PostAsync(VolunteeringTask entity)
     {
         notnimYadContext.VolunteeringTasks.Add(entity);
-        notnimYadContext.SaveChanges();
+        await notnimYadContext.SaveChangesAsync();
         return entity;
     }
-    //דרוש תיקון!!!
     public Task<VolunteeringTask> PutAsync(int id, VolunteeringTask item)
     {
         Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(v => v.Id == id);
@@ -50,11 +49,11 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
     public async Task<VolunteeringTask> DeleteAsync(int id)
     {
         Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(x => x.Id == id);
-        /*if(volunteeringTask != null)
+        if(volunteeringTask != null)
         {
-            notnimYadContext.VolunteeringTasks.Remove(volunteeringTask);
+            notnimYadContext.VolunteeringTasks.Remove(await volunteeringTask);
         }
-        notnimYadContext.SaveChanges();*/
+        await notnimYadContext.SaveChangesAsync();
         return await volunteeringTask;
     }
 
