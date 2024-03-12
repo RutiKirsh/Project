@@ -82,9 +82,6 @@ public partial class NotnimYadContext : DbContext
             entity.Property(e => e.Password)
                 .IsRequired()
                 .HasMaxLength(50);
-            entity.Property(e => e.Type)
-                .IsRequired()
-                .HasMaxLength(500);
             entity.Property(e => e.VolunteerId)
                 .HasMaxLength(10)
                 .HasColumnName("VolunteerID");

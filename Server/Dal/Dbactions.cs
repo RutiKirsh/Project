@@ -6,35 +6,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal
+namespace Dal;
+
+public class Dbactions
 {
-    public class Dbactions
+    static string connString;
+    IConfiguration config;
+
+    public Dbactions(IConfiguration config)
     {
-        static string connString;
-        IConfiguration config;
+        this.config = config;
+    }
+    public string GetConnectionString(string connStrNameInCnfig)
+    {
+        if (connString != null)
+        {
+            return connString;
+        }
+        string connStr = config.GetConnectionString(connStrNameInCnfig);
+        connStr = ReplaceWithCurrentLocation(connStr);
+        return connStr;
+    }
 
-        public Dbactions(IConfiguration config)
-        {
-            this.config = config;
-        }
-        public string GetConnectionString(string connStrNameInCnfig)
-        {
-            if (connString != null)
-            {
-                return connString;
-            }
-            string connStr = config.GetConnectionString(connStrNameInCnfig);
-            connStr = ReplaceWithCurrentLocation(connStr);
-            return connStr;
-        }
-
-        private string ReplaceWithCurrentLocation(string connStr)
-        {
-            string str = AppDomain.CurrentDomain.BaseDirectory;
-            string directryAboveBin = str.Substring(0, str.IndexOf("\\bin"));
-            string twoDirectoriesAboveBin = directryAboveBin.Substring(0, directryAboveBin.LastIndexOf("\\"));
-            connStr = string.Format(connStr, twoDirectoriesAboveBin);
-            return connStr;
-        }
+    private string ReplaceWithCurrentLocation(string connStr)
+    {
+        string str = AppDomain.CurrentDomain.BaseDirectory;
+        string directryAboveBin = str.Substring(0, str.IndexOf("\\bin"));
+        string twoDirectoriesAboveBin = directryAboveBin.Substring(0, directryAboveBin.LastIndexOf("\\"));
+        connStr = string.Format(connStr, twoDirectoriesAboveBin);
+        return connStr;
     }
 }

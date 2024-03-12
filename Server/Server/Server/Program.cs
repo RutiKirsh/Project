@@ -3,9 +3,10 @@ using Dal;
 using Microsoft.EntityFrameworkCore;
 using Dal.DalApi;
 using Dal.DalImplementation;
+using Bl;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddScoped<IRepository<VolunteeringTask>, VolunteeringTaskRepo>();
+builder.Services.AddScoped<BlManager>();
 builder.Services.AddControllers();
 Dbactions actions = new Dbactions(builder.Configuration);
 var connection = actions.GetConnectionString("NotnimYadDB");

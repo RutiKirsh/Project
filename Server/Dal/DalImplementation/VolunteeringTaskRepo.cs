@@ -17,16 +17,16 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
     {
         this.notnimYadContext = notnimYadContext;
     }
-    
+
     public async Task<PagedList<VolunteeringTask>> GetAllAsync(BaseQueryParams queryParams)
     {
         var query = notnimYadContext.VolunteeringTasks.AsQueryable();
-        return await PagedList<VolunteeringTask>.ToPagedListAsync(query, queryParams.PageNumber, queryParams.PageSize);
+        return await PagedList<VolunteeringTask>.ToPagedListAsync(query.OrderBy(task => task.Date), queryParams.PageNumber, queryParams.PageSize);
     }
 
     public async Task<VolunteeringTask> GetSingleAsync(int id)
     {
-        return await notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(task => task.Id == id);
+        return await notnimYadContext.VolunteeringTasks.Include(task => task.Child).FirstOrDefaultAsync(task => task.Id == id);
     }
 
     public async Task<VolunteeringTask> PostAsync(VolunteeringTask entity)
@@ -38,7 +38,7 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
     public Task<VolunteeringTask> PutAsync(int id, VolunteeringTask item)
     {
         Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(v => v.Id == id);
-       /* if(volunteeringTask == null)
+/*        if (volunteeringTask == null)
         {
             volunteeringTask = item.Comments;
         }*/
@@ -49,7 +49,7 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
     public async Task<VolunteeringTask> DeleteAsync(int id)
     {
         Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(x => x.Id == id);
-        if(volunteeringTask != null)
+        if (volunteeringTask != null)
         {
             notnimYadContext.VolunteeringTasks.Remove(await volunteeringTask);
         }

@@ -11,7 +11,7 @@ public partial class User
 
     public string Password { get; set; }
 
-    public string Type { get; set; }
+    public int Type { get; set; }
 
     public string ChildId { get; set; }
 

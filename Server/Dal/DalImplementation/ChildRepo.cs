@@ -19,19 +19,19 @@ public class ChildRepo : IRepositoryLess<Child>
     }
     public async Task<PagedList<Child>> GetAllAsync(BaseQueryParams queryParams)
     {
-        var query = notnimYadContext.Children.AsQueryable();
-        return await PagedList<Child>.ToPagedListAsync(query, queryParams.PageNumber, queryParams.PageSize);
+        var query = notnimYadContext.Children.Include(child => child.Address).AsQueryable();
+        return await PagedList<Child>.ToPagedListAsync(query.OrderBy(child => child.Id), queryParams.PageNumber, queryParams.PageSize);
     }
 
     public async Task<Child> GetSingleAsync(string id)
     {
-        return await notnimYadContext.Children.FirstOrDefaultAsync(c => c.Id == id);
+        return await notnimYadContext.Children.Include(child => child.Address).FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<Child> PostAsync(Child entity)
     {
         notnimYadContext.Children.Add(entity);
-        notnimYadContext.SaveChanges();
+        await notnimYadContext.SaveChangesAsync();
         return entity;
     }
 
@@ -39,5 +39,5 @@ public class ChildRepo : IRepositoryLess<Child>
     {
         throw new NotImplementedException();
     }
-    
+
 }
