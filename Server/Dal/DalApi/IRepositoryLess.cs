@@ -12,5 +12,5 @@ public interface IRepositoryLess<T>
     Task<PagedList<T>> GetAllAsync(BaseQueryParams queryParams);
     Task<T> GetSingleAsync(string id);
     Task<T> PostAsync(T entity);
-    Task<T> PutAsync(int id, T item);
+    Task<T> PutAsync(T item);
 }

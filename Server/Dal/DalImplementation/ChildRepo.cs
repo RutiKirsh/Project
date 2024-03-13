@@ -35,7 +35,7 @@ public class ChildRepo : IRepositoryLess<Child>
         return entity;
     }
 
-    public Task<Child> PutAsync(int id, Child item)
+    public Task<Child> PutAsync(Child item)
     {
         throw new NotImplementedException();
     }

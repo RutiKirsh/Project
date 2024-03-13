@@ -1,4 +1,7 @@
-﻿using Common;
+﻿using Bl;
+using Bl.BlApi;
+using Bl.Models;
+using Common;
 using Dal.DalApi;
 using Dal.DalImplementation;
 using Dal.Models;
@@ -11,7 +14,11 @@ namespace Server.Controllers;
 [ApiController]
 public class ChildrenController : ControllerBase
 {
-    IRepositoryLess<Child> _child;
+    IRepo<Child> _child;
+    public ChildrenController(BlManager manager)
+    {
+        this._child = manager.child;
+    }
 
     [HttpGet]
     public async Task<PagedList<Child>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
@@ -19,14 +26,14 @@ public class ChildrenController : ControllerBase
         return await _child.GetAllAsync(queryParams);
     }
     [HttpGet("{id}")]
-    public async Task<Child> GetSingleAsync(string id)
+    public async Task<Child> GetSingleAsync(string id, BlUser user)
     {
-        return await _child.GetSingleAsync(id);
+        return await _child.GetSingleAsync(id, user);
     }
     [HttpPut("{id}")]
-    public Task<Child> PutAsync(int id, Child item)
+    public Task<Child> PutAsync(Child item, BlUser user)
     {
-        return _child.PutAsync(id, item);
+        return _child.PutAsync(item, user);
     }
 
     [HttpPost]

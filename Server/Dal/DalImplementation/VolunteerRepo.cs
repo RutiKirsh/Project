@@ -35,7 +35,7 @@ public class VolunteerRepo : IRepositoryLess<Volunteer>
         return entity;
     }
 
-    public Task<Volunteer> PutAsync(int id, Volunteer item)
+    public Task<Volunteer> PutAsync(Volunteer item)
     {
         throw new NotImplementedException();
     }

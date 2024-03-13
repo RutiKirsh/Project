@@ -1,4 +1,6 @@
-﻿using Common;
+﻿using Bl.BlApi;
+using Bl.Models;
+using Common;
 using Dal;
 using Dal.DalApi;
 using Dal.Models;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlImplementaion;
 
-public class ChildService : IRepositoryLess<Child>
+public class ChildService : IRepo<Child>
 {
     private IRepositoryLess<Child> _children;
     public ChildService(DalManager manager)
@@ -21,23 +23,33 @@ public class ChildService : IRepositoryLess<Child>
     {
         if ((queryParams as UserQueryParams).user.Type != TypeEnum.ADMIN)
         {
-            throw new Exception("You do not have access permission");
+            throw new Exception("You do not have access permission.");
         }
         return _children.GetAllAsync(queryParams);
     }
 
-    public Task<Child> GetSingleAsync(string id)
+
+    public Task<Child> GetSingleAsync(string id, BlUser user)
     {
-        throw new NotImplementedException();
+        if(user.ChildId != id)
+        {
+            throw new Exception("You do not have access permission.");
+        }
+        return this._children.GetSingleAsync(id);
     }
 
     public Task<Child> PostAsync(Child entity)
     {
-        throw new NotImplementedException();
+        return this._children.PostAsync(entity);
     }
 
-    public Task<Child> PutAsync(int id, Child item)
+
+    public Task<Child> PutAsync(Child item, BlUser user)
     {
-        throw new NotImplementedException();
+        if (user.ChildId != item.Id)
+        {
+            throw new Exception("You do not have access permission.");
+        }
+        return this._children.PutAsync(item);
     }
 }
