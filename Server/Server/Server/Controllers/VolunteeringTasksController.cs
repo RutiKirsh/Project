@@ -1,4 +1,6 @@
-﻿using Common;
+﻿using Bl.BlApi;
+using Bl.Models;
+using Common;
 using Dal.DalApi;
 using Dal.DalImplementation;
 using Dal.Models;
@@ -12,33 +14,33 @@ namespace Server.Controllers;
 [ApiController]
 public class VolunteeringTasksController : ControllerBase
 {
-    IRepository<VolunteeringTask> _volunteeringTasksRepository;
-    public VolunteeringTasksController(IRepository<VolunteeringTask> repository)
+    IRepoDiff<BlVolunteeringTask> _volunteeringTasksRepository;
+    public VolunteeringTasksController(IRepoDiff<BlVolunteeringTask> repository)
     {
         this._volunteeringTasksRepository = repository;
     }
     [HttpGet]
-    public async Task<PagedList<VolunteeringTask>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
+    public async Task<PagedList<BlVolunteeringTask>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
     {
         return await _volunteeringTasksRepository.GetAllAsync(queryParams);
     }
     [HttpGet("{id}")]
-    public async Task<VolunteeringTask> GetSingleAsync(int id)
+    public async Task<BlVolunteeringTask> GetSingleAsync(int id)
     {
         return await _volunteeringTasksRepository.GetSingleAsync(id);
     }
     [HttpPost]
-    public async Task<VolunteeringTask> PostAsync(VolunteeringTask entity)
+    public async Task<BlVolunteeringTask> PostAsync(BlVolunteeringTask entity)
     {
         return await _volunteeringTasksRepository.PostAsync(entity);
     }
     [HttpPut("{id}")]
-    public async Task<VolunteeringTask> PutAsync(int id, VolunteeringTask item)
+    public async Task<BlVolunteeringTask> PutAsync(int id, BlVolunteeringTask item)
     {
         return await _volunteeringTasksRepository.PutAsync(id, item);
     }
     [HttpDelete("{id}")]
-    public async Task<VolunteeringTask> DeleteAsync(int id)
+    public async Task<BlVolunteeringTask> DeleteAsync(int id)
     {
         return await _volunteeringTasksRepository.DeleteAsync(id);
     }
