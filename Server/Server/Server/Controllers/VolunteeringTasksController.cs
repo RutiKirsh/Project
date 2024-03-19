@@ -14,8 +14,8 @@ namespace Server.Controllers;
 [ApiController]
 public class VolunteeringTasksController : ControllerBase
 {
-    IRepoDiff<BlVolunteeringTask> _volunteeringTasksRepository;
-    public VolunteeringTasksController(IRepoDiff<BlVolunteeringTask> repository)
+    IVolunteeringTaskRepo<BlVolunteeringTask> _volunteeringTasksRepository;
+    public VolunteeringTasksController(IVolunteeringTaskRepo<BlVolunteeringTask> repository)
     {
         this._volunteeringTasksRepository = repository;
     }

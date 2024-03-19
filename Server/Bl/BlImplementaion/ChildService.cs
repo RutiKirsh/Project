@@ -12,39 +12,33 @@ using System.Threading.Tasks;
 
 namespace Bl.BlImplementaion;
 
-public class ChildService : IRepo<Child>
+public class ChildService : IChildRepo
 {
     private IRepositoryLess<Child> _children;
     public ChildService(DalManager manager)
     {
         this._children = manager.child;
     }
-    public Task<PagedList<Child>> GetAllAsync(BaseQueryParams queryParams)
-    {
-        if ((queryParams as UserQueryParams).user.Type != TypeEnum.ADMIN)
-        {
-            throw new Exception("You do not have access permission.");
-        }
-        return _children.GetAllAsync(queryParams);
-    }
 
-
-    public Task<Child> GetSingleAsync(string id, BlUser user)
+    public async Task<BlChild> GetSingleAsync(string id, BlUser user)
     {
         if(user.ChildId != id)
         {
             throw new Exception("You do not have access permission.");
         }
-        return this._children.GetSingleAsync(id);
+        var child = this._children.GetSingleAsync(id);
+        return new BlChild((await child).Id, (await child).FirstName, (await child).LastName, (await child).Phone, (await child).Challenge, (await child).BirthDate, (await child).Image, (await child).Comments, (await child).Address);
     }
 
-    public Task<Child> PostAsync(Child entity)
+    public Task<BlChild> PostAsync(BlChild entity)
     {
-        return this._children.PostAsync(entity);
+        var child = new Child();
+
+        return this._children.PostAsync(child);
     }
 
 
-    public Task<Child> PutAsync(Child item, BlUser user)
+    public Task<BlChild> PutAsync(BlChild item, BlUser user)
     {
         if (user.ChildId != item.Id)
         {

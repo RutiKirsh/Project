@@ -1,5 +1,6 @@
 ﻿using Bl.Models;
 using Common;
+using Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Bl.BlApi;
 
-public interface IRepoDiff<T> where T : class
+public interface IVolunteeringTaskRepo
 {
     Task<PagedList<TaskList>> GetAllAsync(BaseQueryParams queryParams);
-    Task<T> GetSingleAsync(int id, BlUser user);
-    Task<T> PostAsync(T entity);
-    Task<T> PutAsync(T item, BlUser user);
+    Task GetSingleAsync(int id, BlUser user);
+    Task PostAsync(BlVolunteeringTask entity);
+    Task PutAsync(BlVolunteeringTask item, BlUser user);
 }

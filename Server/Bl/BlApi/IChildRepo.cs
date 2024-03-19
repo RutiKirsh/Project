@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bl.BlApi;
 
-public interface IRepo<T> where T : class
+public interface IChildRepo
 {
-    Task<PagedList<T>> GetAllAsync(BaseQueryParams queryParams);
-    Task<T> GetSingleAsync(string id, BlUser user);
-    Task<T> PostAsync(T entity);
-    Task<T> PutAsync(T item, BlUser user);
+    Task GetSingleAsync(string id, BlUser user);
+    Task PostAsync(BlChild entity);
+    Task PutAsync(BlChild item, BlUser user);
 }

@@ -1,5 +1,6 @@
 ﻿using Bl.BlApi;
 using Bl.BlImplementaion;
+using Bl.Models;
 using Dal;
 using Dal.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,7 @@ public class BlManager
     {
         ServiceCollection services = new ServiceCollection();
         services.AddScoped<DalManager>();
-        services.AddScoped<IRepo<Child>, ChildService>();
+        services.AddScoped<IChildRepo, ChildService>();
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         dalManager = serviceProvider.GetService<DalManager>();
         child = serviceProvider.GetService<ChildService>();
