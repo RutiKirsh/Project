@@ -31,7 +31,7 @@ public class ChildrenController : ControllerBase
         return await _child.GetSingleAsync(id, user);
     }
     [HttpPut("{id}")]
-    public Task<Child> PutAsync(Child item, BlUser user)
+    public Task<Child> PutAsync([FromQuery] Child item, [FromBody]BlUser user)
     {
         return _child.PutAsync(item, user);
     }

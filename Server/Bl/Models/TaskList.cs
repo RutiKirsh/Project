@@ -23,14 +23,4 @@ public class TaskList
         this.Type = type;
         this.Comments = comments;
     }
-
-    public TaskList(int id, DateTime date, string type, string comments, bool? done, DateTime? end)
-    {
-        Id = id;
-        Date = date;
-        Type = type;
-        Comments = comments;
-        Done = done;
-        End = end;
-    }
 }

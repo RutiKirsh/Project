@@ -19,10 +19,16 @@ public class VolunteeringTaskService : IRepoDiff<VolunteeringTask>
     {
         this._volunteeringTask = manager.volunteeringTask;  
     }
+
     // לכולם יש הרשאה לראות את המשימות
-    public Task<PagedList<TaskList>> GetAllAsync(BaseQueryParams queryParams)
+    public async Task<PagedList<TaskList>> GetAllAsync(BaseQueryParams queryParams)
     {
-        return _volunteeringTask.GetAllAsync(queryParams).Result.ForEach((task) => new TaskList(task.Id, task.Date, task.Type, task.Comments, task.Done, task.End) );
+        var tasks = _volunteeringTask.GetAllAsync(queryParams);
+        var result = new PagedList<TaskList>((await tasks).TotalItems, (await tasks).CurrentPage, (await tasks).PageSize, new List<TaskList>());
+        foreach (var task in await tasks) {
+            result.Add(new TaskList(task.Id, task.Date, task.Type, task.Comments, task.Done, task.End));
+        }
+        return result;
     }
 
     public async Task<VolunteeringTask> GetSingleAsync(int id, BlUser user)
@@ -43,6 +49,6 @@ public class VolunteeringTaskService : IRepoDiff<VolunteeringTask>
 
     public Task<VolunteeringTask> PutAsync(VolunteeringTask item, BlUser user)
     {
-       
+        return null;
     }
 }
