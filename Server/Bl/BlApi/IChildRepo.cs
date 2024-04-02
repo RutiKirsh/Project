@@ -11,7 +11,7 @@ namespace Bl.BlApi;
 
 public interface IChildRepo
 {
-    Task GetSingleAsync(string id, BlUser user);
-    Task PostAsync(BlChild entity);
-    Task PutAsync(BlChild item, BlUser user);
+    Task<BlChild> GetSingleAsync(string id, BlUser user);
+    Task<BlChild> PostAsync(BlChild entity);
+    Task<BlChild> PutAsync(BlChild item, BlUser user);
 }

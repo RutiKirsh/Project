@@ -12,7 +12,7 @@ namespace Bl.BlApi;
 public interface IVolunteersRepo
 {
     Task<PagedList<BlVolunteer>> GetAllAsync(BaseQueryParams queryParams);
-    Task GetSingleAsync(int id, BlUser user);
-    Task PostAsync(BlVolunteer entity);
-    Task PutAsync(BlVolunteer item, BlUser user);
+    Task<BlVolunteer> GetSingleAsync(string id, BlUser user);
+    Task<BlVolunteer> PostAsync(BlVolunteer entity);
+    Task<BlVolunteer> PutAsync(BlVolunteer item, BlUser user);
 }

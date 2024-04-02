@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlImplementaion;
 
-public class VolunteeringTaskService : IRepoDiff<VolunteeringTask>
+public class VolunteeringTaskService : IVolunteeringTaskRepo
 {
     private IRepository<VolunteeringTask> _volunteeringTask;
     public VolunteeringTaskService(DalManager manager)
@@ -31,24 +31,38 @@ public class VolunteeringTaskService : IRepoDiff<VolunteeringTask>
         return result;
     }
 
-    public async Task<VolunteeringTask> GetSingleAsync(int id, BlUser user)
+    public async Task<BlVolunteeringTask> GetSingleAsync(int id, BlUser user)
     {
-        Task<VolunteeringTask> task = _volunteeringTask.GetSingleAsync(id);
-        if (user.ChildId != task.Result.ChildId)
+        var task = _volunteeringTask.GetSingleAsync(id);
+        if (user.ChildId != task.Result.ChildId || user.Type != TypeEnum.VOLUNTEER)
         {
             throw new Exception("You do not have access permission.");
         }
-        return await task;
+        BlVolunteeringTask res = new((await task).Id, (await task).Date, (await task).Type, (await task).ChildId, (await task).VolunteerId, (await task).End, (await task).Done, (await task).Comments);
+        return res;
     }
     //לתקן כשמרוכזים!!!
 
-    public Task<VolunteeringTask> PostAsync(VolunteeringTask entity)
+    public async Task<BlVolunteeringTask> PostAsync(BlVolunteeringTask entity)
     {
-        return this._volunteeringTask.PostAsync(entity);
+        var volunteeringTask = new VolunteeringTask();
+        volunteeringTask.Id = entity.Id;
+        volunteeringTask.Date = entity.Date;
+        volunteeringTask.Type = entity.Type;
+        volunteeringTask.ChildId = entity.ChildId;
+        volunteeringTask.VolunteerId = entity.VolunteerId;
+        volunteeringTask.End = entity.End;
+        volunteeringTask.Done = entity.Done;
+        volunteeringTask.Comments = entity.Comments;
+        var res = _volunteeringTask.PostAsync(volunteeringTask);
+        var blVolunteeringTask = new BlVolunteeringTask((await res).Id, (await res).Date, (await res).Type, (await res).ChildId, (await res).VolunteerId, (await res).End, (await res).Done, (await res).Comments);
+        return blVolunteeringTask;
     }
 
-    public Task<VolunteeringTask> PutAsync(VolunteeringTask item, BlUser user)
+    public Task<BlVolunteeringTask> PutAsync(BlVolunteeringTask item, BlUser user)
     {
         return null;
     }
+
+  
 }

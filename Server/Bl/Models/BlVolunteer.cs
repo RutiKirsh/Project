@@ -22,4 +22,14 @@ public class BlVolunteer
     public string Comments { get; set; }
 
     public virtual Address Address { get; set; }
+    public BlVolunteer(string id, string firstName, string lastName, string phone, DateTime birthDate, string comments, Address address)
+    {
+        Id = id;
+        FirstName = firstName;
+        LastName = lastName;
+        Phone = phone;
+        BirthDate = birthDate;
+        Comments = comments;
+        Address = address;    
+    }
 }

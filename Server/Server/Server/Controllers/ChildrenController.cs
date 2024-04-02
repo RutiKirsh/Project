@@ -14,7 +14,7 @@ namespace Server.Controllers;
 [ApiController]
 public class ChildrenController : ControllerBase
 {
-    IRepo<Child> _child;
+    IChildRepo _child;
     public ChildrenController(BlManager manager)
     {
         this._child = manager.child;

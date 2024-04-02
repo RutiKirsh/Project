@@ -11,8 +11,9 @@ namespace Bl.BlApi;
 
 public interface IVolunteeringTaskRepo
 {
-    Task<PagedList<TaskList>> GetAllAsync(BaseQueryParams queryParams);
-    Task GetSingleAsync(int id, BlUser user);
-    Task PostAsync(BlVolunteeringTask entity);
-    Task PutAsync(BlVolunteeringTask item, BlUser user);
+    public Task<PagedList<TaskList>> GetAllAsync(BaseQueryParams queryParams);
+    public Task<BlVolunteeringTask> GetSingleAsync(int id, BlUser user);
+    public Task<BlVolunteeringTask> PostAsync(BlVolunteeringTask entity);
+    public Task<BlVolunteeringTask> PutAsync(BlVolunteeringTask item, BlUser user);
+
 }
