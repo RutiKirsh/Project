@@ -16,13 +16,19 @@ public class BlManager
 {
     public DalManager dalManager { get; }
     public ChildService child { get; }
+    public VolunteeringTaskService voluteeringTaskService { get; }
+    public VolunteersService volunteersService { get; }
     public BlManager()
     {
         ServiceCollection services = new ServiceCollection();
         services.AddScoped<DalManager>();
         services.AddScoped<IChildRepo, ChildService>();
+        services.AddScoped<IVolunteeringTaskRepo, VolunteeringTaskService>();
+        services.AddScoped<IVolunteersRepo, VolunteersService>();
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         dalManager = serviceProvider.GetService<DalManager>();
         child = serviceProvider.GetService<ChildService>();
+        voluteeringTaskService = serviceProvider.GetService<VolunteeringTaskService>();
+        volunteersService = serviceProvider.GetService<VolunteersService>();
     }
 }

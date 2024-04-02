@@ -2,9 +2,6 @@
 using Bl.BlApi;
 using Bl.Models;
 using Common;
-using Dal.DalApi;
-using Dal.DalImplementation;
-using Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,24 +17,19 @@ public class ChildrenController : ControllerBase
         this._child = manager.child;
     }
 
-    [HttpGet]
-    public async Task<PagedList<Child>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
-    {
-        return await _child.GetAllAsync(queryParams);
-    }
     [HttpGet("{id}")]
-    public async Task<Child> GetSingleAsync(string id, BlUser user)
+    public async Task<BlChild> GetSingleAsync(string id, BlUser user)
     {
         return await _child.GetSingleAsync(id, user);
     }
     [HttpPut("{id}")]
-    public Task<Child> PutAsync([FromQuery] Child item, [FromBody]BlUser user)
+    public async Task<BlChild> PutAsync([FromQuery] BlChild item, [FromBody]BlUser user)
     {
-        return _child.PutAsync(item, user);
+        return await _child.PutAsync(item, user);
     }
 
     [HttpPost]
-    public async Task<Child> PostAsync(Child entity)
+    public async Task<BlChild> PostAsync(BlChild entity)
     {
         return await _child.PostAsync(entity);
     }

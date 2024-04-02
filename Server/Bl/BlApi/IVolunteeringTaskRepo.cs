@@ -15,5 +15,5 @@ public interface IVolunteeringTaskRepo
     public Task<BlVolunteeringTask> GetSingleAsync(int id, BlUser user);
     public Task<BlVolunteeringTask> PostAsync(BlVolunteeringTask entity);
     public Task<BlVolunteeringTask> PutAsync(BlVolunteeringTask item, BlUser user);
-
+    public Task<BlVolunteeringTask> DeleteAsync(int id, BlUser user);
 }

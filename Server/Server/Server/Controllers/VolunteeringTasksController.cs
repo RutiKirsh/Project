@@ -14,20 +14,20 @@ namespace Server.Controllers;
 [ApiController]
 public class VolunteeringTasksController : ControllerBase
 {
-    IVolunteeringTaskRepo<BlVolunteeringTask> _volunteeringTasksRepository;
-    public VolunteeringTasksController(IVolunteeringTaskRepo<BlVolunteeringTask> repository)
+    IVolunteeringTaskRepo _volunteeringTasksRepository;
+    public VolunteeringTasksController(IVolunteeringTaskRepo repository)
     {
         this._volunteeringTasksRepository = repository;
     }
     [HttpGet]
-    public async Task<PagedList<BlVolunteeringTask>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
+    public async Task<PagedList<TaskList>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
     {
         return await _volunteeringTasksRepository.GetAllAsync(queryParams);
     }
     [HttpGet("{id}")]
-    public async Task<BlVolunteeringTask> GetSingleAsync(int id)
+    public async Task<BlVolunteeringTask> GetSingleAsync(int id, [FromBody] BlUser user)
     {
-        return await _volunteeringTasksRepository.GetSingleAsync(id);
+        return await _volunteeringTasksRepository.GetSingleAsync(id, user);
     }
     [HttpPost]
     public async Task<BlVolunteeringTask> PostAsync(BlVolunteeringTask entity)
@@ -35,9 +35,9 @@ public class VolunteeringTasksController : ControllerBase
         return await _volunteeringTasksRepository.PostAsync(entity);
     }
     [HttpPut("{id}")]
-    public async Task<BlVolunteeringTask> PutAsync(int id, BlVolunteeringTask item)
+    public async Task<BlVolunteeringTask> PutAsync(BlVolunteeringTask item, [FromBody] BlUser user)
     {
-        return await _volunteeringTasksRepository.PutAsync(id, item);
+        return await _volunteeringTasksRepository.PutAsync(item, user);
     }
     [HttpDelete("{id}")]
     public async Task<BlVolunteeringTask> DeleteAsync(int id)
