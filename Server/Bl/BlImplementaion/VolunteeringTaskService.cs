@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlImplementaion;
 
-public class VolunteeringTaskService : IRepoDiff<VolunteeringTask>
+public class VolunteeringTaskService : IVolunteeringTaskRepo
 {
     private IRepository<VolunteeringTask> _volunteeringTask;
     public VolunteeringTaskService(DalManager manager)
@@ -42,13 +42,4 @@ public class VolunteeringTaskService : IRepoDiff<VolunteeringTask>
     }
     //לתקן כשמרוכזים!!!
 
-    public Task<VolunteeringTask> PostAsync(VolunteeringTask entity)
-    {
-        return this._volunteeringTask.PostAsync(entity);
-    }
-
-    public Task<VolunteeringTask> PutAsync(VolunteeringTask item, BlUser user)
-    {
-        return null;
-    }
 }
