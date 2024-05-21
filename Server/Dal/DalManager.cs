@@ -19,11 +19,11 @@ public class DalManager
     {
         ServiceCollection services = new ServiceCollection();
         services.AddDbContext<NotnimYadContext>();
-        services.AddScoped<IRepositoryLess<Child>, ChildRepo>();
-        services.AddScoped<IRepository<VolunteeringTask>, VolunteeringTaskRepo>();
-        services.AddScoped<IRepositoryLess<Volunteer>, VolunteerRepo>();
+        services.AddScoped</*IRepositoryLess<Child>, */ChildRepo>();
+        services.AddScoped</*IRepository<VolunteeringTask>, */VolunteeringTaskRepo>();
+        services.AddScoped</*IRepositoryLess<Volunteer>, */VolunteerRepo>();
         ServiceProvider servicesProvider = services.BuildServiceProvider();
-        child = servicesProvider.GetRequiredService<ChildRepo>();
+        child = servicesProvider.GetService<ChildRepo>();
         volunteeringTask = servicesProvider.GetService<VolunteeringTaskRepo>();
         volunteer = servicesProvider.GetService<VolunteerRepo>();
     }

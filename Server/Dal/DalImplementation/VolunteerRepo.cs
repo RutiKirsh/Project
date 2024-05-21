@@ -17,7 +17,7 @@ public class VolunteerRepo : IRepositoryLess<Volunteer>
     {
         this.notnimYadContext = notnimYadContext;
     }
-    public async Task<PagedList<Volunteer>> GetAllAsync(BaseQueryParams queryParams)
+    public async Task<PagedList<Volunteer>> GetAllAsync(BaseQueryParams queryParams = null)
     {
         var query = notnimYadContext.Volunteers.Include(volunteer => volunteer.Address).AsQueryable();
         return await PagedList<Volunteer>.ToPagedListAsync(query.OrderBy(volunteer => volunteer.Id), queryParams.PageNumber, queryParams.PageSize);

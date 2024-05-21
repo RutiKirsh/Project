@@ -35,14 +35,14 @@ public class VolunteeringTasksController : ControllerBase
         return await _volunteeringTasksRepository.PostAsync(entity);
     }
     [HttpPut("{id}")]
-    public async Task<BlVolunteeringTask> PutAsync(BlVolunteeringTask item, [FromBody] BlUser user)
+    public async Task<BlVolunteeringTask> PutAsync([FromQuery] BlVolunteeringTask item, [FromBody] BlUser user)
     {
         return await _volunteeringTasksRepository.PutAsync(item, user);
     }
     [HttpDelete("{id}")]
-    public async Task<BlVolunteeringTask> DeleteAsync(int id)
+    public async Task<BlVolunteeringTask> DeleteAsync(int id, [FromBody] BlUser user)
     {
-        return await _volunteeringTasksRepository.DeleteAsync(id);
+        return await _volunteeringTasksRepository.DeleteAsync(id, user);
     }
 
 

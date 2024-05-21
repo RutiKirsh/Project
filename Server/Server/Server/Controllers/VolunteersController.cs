@@ -28,7 +28,7 @@ public class VolunteersController : ControllerBase
         return await _volunteer.GetSingleAsync(id, user);
     }
     [HttpPut("{id}")]
-    public Task<BlVolunteer> PutAsync(BlVolunteer item, BlUser user)
+    public Task<BlVolunteer> PutAsync([FromQuery] BlVolunteer item, [FromBody] BlUser user)
     {
         return _volunteer.PutAsync(item, user);
     }

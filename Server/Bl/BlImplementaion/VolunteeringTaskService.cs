@@ -20,6 +20,11 @@ public class VolunteeringTaskService : IVolunteeringTaskRepo
         this._volunteeringTask = manager.volunteeringTask;  
     }
 
+    public Task<BlVolunteeringTask> DeleteAsync(int id, BlUser user)
+    {
+        throw new NotImplementedException();
+    }
+
     // לכולם יש הרשאה לראות את המשימות
     public async Task<PagedList<TaskList>> GetAllAsync(BaseQueryParams queryParams)
     {

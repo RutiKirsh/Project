@@ -18,6 +18,5 @@ public class BaseQueryParams
         get { return pageSize; }
         set { if (value > 0 && value < MAX_PAGE_SIZE) pageSize = value; }
     }
-
 }
 

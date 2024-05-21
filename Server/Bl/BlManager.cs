@@ -22,9 +22,9 @@ public class BlManager
     {
         ServiceCollection services = new ServiceCollection();
         services.AddScoped<DalManager>();
-        services.AddScoped<IChildRepo, ChildService>();
-        services.AddScoped<IVolunteeringTaskRepo, VolunteeringTaskService>();
-        services.AddScoped<IVolunteersRepo, VolunteersService>();
+        services.AddScoped</*IChildRepo, */ChildService>();
+        services.AddScoped</*IVolunteeringTaskRepo, */VolunteeringTaskService>();
+        services.AddScoped</*IVolunteersRepo, */VolunteersService>();
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         dalManager = serviceProvider.GetService<DalManager>();
         child = serviceProvider.GetService<ChildService>();
