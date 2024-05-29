@@ -1,6 +1,7 @@
 ﻿using Dal.DalApi;
 using Dal.DalImplementation;
 using Dal.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,10 @@ public class DalManager
     public ChildRepo child { get; }
     public VolunteeringTaskRepo volunteeringTask { get; }
     public VolunteerRepo volunteer { get; }
-    public DalManager()
+    public DalManager(string connection)
     {
         ServiceCollection services = new ServiceCollection();
-        services.AddDbContext<NotnimYadContext>();
+        services.AddDbContext<NotnimYadContext>(options => options.UseSqlServer(connection));
         services.AddScoped</*IRepositoryLess<Child>, */ChildRepo>();
         services.AddScoped</*IRepository<VolunteeringTask>, */VolunteeringTaskRepo>();
         services.AddScoped</*IRepositoryLess<Volunteer>, */VolunteerRepo>();

@@ -23,7 +23,7 @@ public class VolunteersService : IVolunteersRepo
     {
         var volunteers = _volunteer.GetAllAsync(queryParams);
         var result = new PagedList<BlVolunteer>((await volunteers).TotalItems, (await volunteers).CurrentPage, (await volunteers).PageSize, new List<BlVolunteer>());
-        foreach (var volunteer in result)
+        foreach (var volunteer in await volunteers)
         {
             result.Add(new BlVolunteer(volunteer.Id, volunteer.FirstName, volunteer.LastName, volunteer.Phone, volunteer.BirthDate, volunteer.Comments, volunteer.Address));
         }

@@ -18,10 +18,10 @@ public class BlManager
     public ChildService child { get; }
     public VolunteeringTaskService voluteeringTaskService { get; }
     public VolunteersService volunteersService { get; }
-    public BlManager()
+    public BlManager(string connection)
     {
         ServiceCollection services = new ServiceCollection();
-        services.AddScoped<DalManager>();
+        services.AddScoped<DalManager>(d => new DalManager(connection));
         services.AddScoped</*IChildRepo, */ChildService>();
         services.AddScoped</*IVolunteeringTaskRepo, */VolunteeringTaskService>();
         services.AddScoped</*IVolunteersRepo, */VolunteersService>();
