@@ -17,6 +17,16 @@ public class UserRepo : IUserRepo
     {
         this.notnimYadContext = notnimYadContext;
     }
+
+    public async Task<bool> EmailExist(string email)
+    {
+        if (await notnimYadContext.Users.FirstAsync(x => x.Email == email) == null)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public async Task<PagedList<User>> GetAllAsync(BaseQueryParams queryParams)
     {
         var query = notnimYadContext.Users.AsQueryable();

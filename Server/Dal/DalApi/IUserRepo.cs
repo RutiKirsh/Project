@@ -10,6 +10,7 @@ namespace Dal.DalApi;
 
 public interface IUserRepo
 {
+    public Task<bool> EmailExist(string email);
     Task<PagedList<User>> GetAllAsync(BaseQueryParams queryParams);
     Task<User> GetSingleAsync(int id);
     Task<User> PostAsync(User entity);

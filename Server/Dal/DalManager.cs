@@ -16,6 +16,7 @@ public class DalManager
     public ChildRepo child { get; }
     public VolunteeringTaskRepo volunteeringTask { get; }
     public VolunteerRepo volunteer { get; }
+    public UserRepo user { get; }
     public DalManager(string connection)
     {
         ServiceCollection services = new ServiceCollection();
@@ -23,9 +24,11 @@ public class DalManager
         services.AddScoped</*IRepositoryLess<Child>, */ChildRepo>();
         services.AddScoped</*IRepository<VolunteeringTask>, */VolunteeringTaskRepo>();
         services.AddScoped</*IRepositoryLess<Volunteer>, */VolunteerRepo>();
+        services.AddScoped< UserRepo>();
         ServiceProvider servicesProvider = services.BuildServiceProvider();
         child = servicesProvider.GetService<ChildRepo>();
         volunteeringTask = servicesProvider.GetService<VolunteeringTaskRepo>();
         volunteer = servicesProvider.GetService<VolunteerRepo>();
+        user = servicesProvider.GetService<UserRepo>();
     }
 }
