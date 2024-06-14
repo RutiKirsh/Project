@@ -20,11 +20,7 @@ public class UserRepo : IUserRepo
 
     public async Task<bool> EmailExist(string email)
     {
-        if (await notnimYadContext.Users.FirstAsync(x => x.Email == email) == null)
-        {
-            return true;
-        }
-        return false;
+        return await notnimYadContext.Users.AnyAsync(x => x.Email.Equals(email));
     }
 
     public async Task<PagedList<User>> GetAllAsync(BaseQueryParams queryParams)

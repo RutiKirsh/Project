@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Dal.Models;
+namespace Server.Models;
 
 public partial class Address
 {

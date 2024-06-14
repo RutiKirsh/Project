@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dal.Models;
+namespace Server.Models;
 
 public partial class NotnimYadContext : DbContext
 {
