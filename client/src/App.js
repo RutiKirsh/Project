@@ -3,7 +3,6 @@ import './App.css';
 import Tasks from './componants/tasks';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import SignUp from './componants/signUp';
 
 function App() {
   return (
@@ -22,10 +21,8 @@ function App() {
           Learn React
         </a>
       </header>
-      <SignUp></SignUp>
       <Provider store={store}>
         <Tasks></Tasks>
-        
       </Provider>
     </div>
   );
