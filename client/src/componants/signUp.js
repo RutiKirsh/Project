@@ -22,7 +22,7 @@ export default function SignUp() {
     useEffect(() => {
         const input = emailInputRef.current;
         if (input) {
-            input.addEventListener('blur', checkExist());
+            input.addEventListener('blur', checkExist);
         }
         //אנחנו אמורות להוסיף פה ולידציה של אימייל
     }, []);
