@@ -63,13 +63,9 @@ export default function AddChild() {
             formData.append("Street", childData.Street);
             formData.append("Building", childData.Building);
             formData.append("Comments", childData.Comments);
-            for (const pair of formData.entries()) {
-                console.log(`${pair[0]}: ${pair[1]}`);
-            }
 
             const response = await fetch("https://localhost:7190/api/children", {
                 method: "POST",
-                // contentType: "multipart/form-data",
                 body: formData
             });
 
