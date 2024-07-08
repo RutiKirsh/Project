@@ -9,7 +9,7 @@ namespace Server.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IUserRepo _userRepo;
+        private IUserService _userRepo;
         public UsersController(BlManager blManager) {
             this._userRepo = blManager.userService;
         }

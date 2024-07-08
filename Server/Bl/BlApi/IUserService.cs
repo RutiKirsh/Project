@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlApi
 {
-    public interface IUserRepo
+    public interface IUserService
     {
         public Task<bool> EmailExist(string email);
     }

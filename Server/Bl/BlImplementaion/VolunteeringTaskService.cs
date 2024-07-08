@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlImplementaion;
 
-public class VolunteeringTaskService : IVolunteeringTaskRepo
+public class VolunteeringTaskService : IVolunteeringTaskService
 {
     private IRepository<VolunteeringTask> _volunteeringTask;
     public VolunteeringTaskService(DalManager manager)

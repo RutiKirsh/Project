@@ -15,14 +15,17 @@ namespace Bl.BlImplementaion;
 public class ChildService : IChildService
 {
     private IRepositoryLess<Child> _children;
+    private IUserRepo _users;
     public ChildService(DalManager manager)
     {
         this._children = manager.child;
+        this._users = manager.user;
     }
 
-    public async Task<BlChild> GetSingleAsync(string id, BlUser user)
+    public async Task<BlChild> GetSingleAsync(string id, string email, string pass)
     {
-        if(user.ChildId != id)
+        var user = await _users.GetSingleAsync(email);
+        if(user == null || user.Password != pass || user.ChildId != id)
         {
             throw new Exception("You do not have access permission.");
         }

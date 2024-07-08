@@ -11,7 +11,7 @@ namespace Bl.BlApi;
 
 public interface IChildService
 {
-    Task<BlChild> GetSingleAsync(string id, BlUser user);
+    Task<BlChild> GetSingleAsync(string id, string email, string pass);
     Task<BlChild> PostAsync(PostChild entity);
     Task<BlChild> PutAsync(BlChild item, BlUser user);
 }

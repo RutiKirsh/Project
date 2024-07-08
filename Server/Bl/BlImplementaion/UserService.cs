@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlImplementaion
 {
-    public class UserService : Bl.BlApi.IUserRepo
+    public class UserService : Bl.BlApi.IUserService
     {
         private Dal.DalApi.IUserRepo _userRepo;
         public UserService(DalManager dalManager) {

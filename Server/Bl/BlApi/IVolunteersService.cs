@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlApi;
 
-public interface IVolunteersRepo
+public interface IVolunteersService
 {
     Task<PagedList<BlVolunteer>> GetAllAsync(BaseQueryParams queryParams);
     Task<BlVolunteer> GetSingleAsync(string id, BlUser user);

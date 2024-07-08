@@ -29,9 +29,9 @@ public class UserRepo : IUserRepo
         return await PagedList<User>.ToPagedListAsync(query.OrderBy(user => user.Id), queryParams.PageNumber, queryParams.PageSize);
     }
 
-    public async Task<User> GetSingleAsync(int id)
+    public async Task<User> GetSingleAsync(string email)
     {
-        return await notnimYadContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+        return await notnimYadContext.Users.FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<User> PostAsync(User entity)

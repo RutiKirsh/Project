@@ -1,0 +1,25 @@
+.user-details {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px;
+  }
+  
+  .popover h2 {
+    margin-top: 0;
+  }
+  
+  .popover p {
+    margin: 5px 0;
+  }
+  

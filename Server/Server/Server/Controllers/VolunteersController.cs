@@ -11,7 +11,7 @@ namespace Server.Controllers;
 [ApiController]
 public class VolunteersController : ControllerBase
 {
-    IVolunteersRepo _volunteer;
+    IVolunteersService _volunteer;
     public VolunteersController(BlManager manager)
     {
         _volunteer = manager.volunteersService;
