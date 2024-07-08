@@ -18,9 +18,9 @@ public class ChildrenController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<BlChild> GetSingleAsync(string id, BlUser user)
+    public async Task<BlChild> GetSingleAsync(string id, [FromQuery]string email, [FromQuery] string pass)
     {
-        return await _child.GetSingleAsync(id, user);
+        return await _child.GetSingleAsync(id, email, pass);
     }
 
     [HttpPut("{id}")]

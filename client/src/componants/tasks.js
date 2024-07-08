@@ -10,7 +10,7 @@ export default function Tasks(){
     const dispatch = useDispatch();
     return (
         <div>
-            ghjhf
+            
             {tasks.map((item) => (
                 <div>
                     {item.date} {item.hour} {item.type} {item.comments}
