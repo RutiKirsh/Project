@@ -11,7 +11,7 @@ namespace Server.Controllers;
 [ApiController]
 public class ChildrenController : ControllerBase
 {
-    IChildRepo _child;
+    IChildService _child;
     public ChildrenController(BlManager manager)
     {
         this._child = manager.child;
@@ -22,6 +22,7 @@ public class ChildrenController : ControllerBase
     {
         return await _child.GetSingleAsync(id, user);
     }
+
     [HttpPut("{id}")]
     public async Task<BlChild> PutAsync([FromQuery] BlChild item, [FromBody]BlUser user)
     {
@@ -29,7 +30,7 @@ public class ChildrenController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<BlChild> PostAsync(BlChild entity)
+    public async Task<BlChild> PostAsync([FromForm]PostChild entity)
     {
         return await _child.PostAsync(entity);
     }

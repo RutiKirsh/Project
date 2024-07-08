@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bl.BlApi;
 
-public interface IChildRepo
+public interface IChildService
 {
     Task<BlChild> GetSingleAsync(string id, BlUser user);
-    Task<BlChild> PostAsync(BlChild entity);
+    Task<BlChild> PostAsync(PostChild entity);
     Task<BlChild> PutAsync(BlChild item, BlUser user);
 }

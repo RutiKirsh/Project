@@ -19,6 +19,7 @@ public class BlManager
     public VolunteeringTaskService voluteeringTaskService { get; }
     public VolunteersService volunteersService { get; }
     public UserService userService { get; }
+    public InfoService infoService { get; }
     public BlManager(string connection)
     {
         ServiceCollection services = new ServiceCollection();
@@ -27,11 +28,13 @@ public class BlManager
         services.AddScoped</*IVolunteeringTaskRepo, */VolunteeringTaskService>();
         services.AddScoped</*IVolunteersRepo, */VolunteersService>();
         services.AddScoped< UserService>();
+        services.AddScoped< InfoService>();
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         dalManager = serviceProvider.GetService<DalManager>();
         child = serviceProvider.GetService<ChildService>();
         voluteeringTaskService = serviceProvider.GetService<VolunteeringTaskService>();
         volunteersService = serviceProvider.GetService<VolunteersService>();
         userService = serviceProvider.GetService<UserService>();
+        infoService = serviceProvider.GetService<InfoService>();
     }
 }

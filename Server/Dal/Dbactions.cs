@@ -30,10 +30,11 @@ public class Dbactions
 
     private string ReplaceWithCurrentLocation(string connStr)
     {
-        string str = AppDomain.CurrentDomain.BaseDirectory;
-        string directryAboveBin = str.Substring(0, str.IndexOf("\\bin"));
-        string twoDirectoriesAboveBin = directryAboveBin.Substring(0, directryAboveBin.LastIndexOf("\\"));
-        connStr = string.Format(connStr, twoDirectoriesAboveBin);
+        //  string str = AppDomain.CurrentDomain.BaseDirectory;
+        //  string directryAboveBin = str.Substring(0, str.IndexOf("\\bin"));
+        //  string twoDirectoriesAboveBin = directryAboveBin.Substring(0, directryAboveBin.LastIndexOf("\\"));
+        string folderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName);
+        connStr = string.Format(connStr, /*twoDirectoriesAboveBin*/folderPath);
         return connStr;
     }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef} from 'react';
 
 function checkExist() {
     const email = document.getElementById("emailInput").value;
@@ -16,7 +16,6 @@ function checkExist() {
 }
 
 export default function SignUp() {
-    /*const [email, setEmail] = useState('');*/
     const emailInputRef = useRef(null);
 
     useEffect(() => {

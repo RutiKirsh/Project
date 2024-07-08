@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 function loadTasks() {
@@ -8,7 +9,7 @@ export default function Tasks(){
     const tasks = useSelector((state) => state.taskReducer);
     const dispatch = useDispatch();
     return (
-        <div onLoad="loadTasks()">
+        <div>
             ghjhf
             {tasks.map((item) => (
                 <div>

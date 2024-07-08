@@ -3,6 +3,7 @@ import './App.css';
 import Tasks from './componants/tasks';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import AddChild from './componants/addChild';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       </header>
       <Provider store={store}>
         <Tasks></Tasks>
+        <AddChild></AddChild>
       </Provider>
     </div>
   );

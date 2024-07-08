@@ -42,7 +42,7 @@ public partial class NotnimYadContext : DbContext
 
         modelBuilder.Entity<Child>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Children__3214EC07F7845CFC");
+            entity.HasKey(e => e.Id).HasName("PK__Children__3214EC07B2E3D58A");
 
             entity.Property(e => e.Id).HasMaxLength(10);
             entity.Property(e => e.AddressId).HasColumnName("AddressID");
@@ -54,7 +54,6 @@ public partial class NotnimYadContext : DbContext
             entity.Property(e => e.FirstName)
                 .IsRequired()
                 .HasMaxLength(20);
-            entity.Property(e => e.Image).HasColumnType("image");
             entity.Property(e => e.LastName)
                 .IsRequired()
                 .HasMaxLength(20);
@@ -140,7 +139,7 @@ public partial class NotnimYadContext : DbContext
 
             entity.HasOne(d => d.Child).WithMany(p => p.VolunteeringTasks)
                 .HasForeignKey(d => d.ChildId)
-                .HasConstraintName("FK_VolenteeringTasksChildren");
+                .HasConstraintName("FK_VolunteeringTasksChildren");
 
             entity.HasOne(d => d.Volunteer).WithMany(p => p.VolunteeringTasks)
                 .HasForeignKey(d => d.VolunteerId)

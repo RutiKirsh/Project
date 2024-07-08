@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Bl.BlImplementaion;
 
-public class ChildService : IChildRepo
+public class ChildService : IChildService
 {
     private IRepositoryLess<Child> _children;
     public ChildService(DalManager manager)
@@ -30,8 +30,25 @@ public class ChildService : IChildRepo
         return new BlChild((await child).Id, (await child).FirstName, (await child).LastName, (await child).Phone, (await child).Challenge, (await child).BirthDate, (await child).Image, (await child).Comments, (await child).Address);
     }
 
-    public async Task<BlChild> PostAsync(BlChild entity)
+    public async Task<BlChild> PostAsync(PostChild entity)
     {
+        if (entity.Image == null || entity.Image.Length == 0)
+        {
+            throw new Exception("No file uploaded");
+        }
+        string folderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "DB", "Uploads");
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        var filePath = Path.Combine(folderPath, entity.Image.FileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await entity.Image.CopyToAsync(stream);
+        }
+
         var child = new Child();
         child.Id = entity.Id;
         child.FirstName = entity.FirstName;
@@ -39,9 +56,9 @@ public class ChildService : IChildRepo
         child.Phone = entity.Phone;
         child.Challenge = entity.Challenge;
         child.BirthDate = entity.BirthDate;
-        child.Image = entity.Image;
+        child.Image = filePath;
         child.Comments = entity.Comments;
-        child.Address = entity.Address;
+        child.Address = new Address {City = entity.City, Street = entity.Street, Building = entity.Street};
 
         var res = _children.PostAsync(child);
         var blChild = new BlChild((await res).Id, (await res).FirstName, (await res).LastName, (await res).Phone, (await res).Challenge, (await res).BirthDate, (await res).Image, (await res).Comments, (await res).Address);

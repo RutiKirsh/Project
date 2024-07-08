@@ -1,4 +1,5 @@
 ﻿using Dal.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,12 @@ public class BlChild
 
     public DateTime BirthDate { get; set; }
 
-    public byte[] Image { get; set; }
+    public string ImageURL { get; set; }
 
     public string Comments { get; set; }
 
     public virtual Address Address { get; set; }
-    public BlChild(string id, string firstName, string lastName, string phone, string challenge, DateTime dateTime, byte[] image, string comments, Address address)
+    public BlChild(string id, string firstName, string lastName, string phone, string challenge, DateTime dateTime, string image, string comments, Address address)
     {
         Id = id;
         FirstName = firstName;
@@ -34,7 +35,7 @@ public class BlChild
         Phone = phone;
         Challenge = challenge;
         BirthDate = dateTime;
-        Image = image;
+        ImageURL = image;
         Comments = comments;
         Address = address;
     }
