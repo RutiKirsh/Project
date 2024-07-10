@@ -39,7 +39,7 @@ public class VolunteeringTaskService : IVolunteeringTaskService
     public async Task<BlVolunteeringTask> GetSingleAsync(int id, BlUser user)
     {
         var task = _volunteeringTask.GetSingleAsync(id);
-        if (user.ChildId != task.Result.ChildId || user.Type != TypeEnum.VOLUNTEER)
+        if (user.Child.Id != task.Result.ChildId || user.Type != "volunteer")
         {
             throw new Exception("You do not have access permission.");
         }

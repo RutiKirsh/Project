@@ -31,7 +31,6 @@ export default function AddChild() {
     useEffect(() => {
         async function fetchChallenges() {
             const data = await getChallenges();
-            console.log(data);
             setChallenges(data);
         }
 
@@ -82,12 +81,12 @@ export default function AddChild() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="Id" value={childData.Id} onChange={handleInputChange} placeholder="מספר זהות"></input>
-                <input type="text" name="FirstName" value={childData.FirstName} onChange={handleInputChange} placeholder="שם פרטי"></input>
-                <input type="text" name="LastName" value={childData.LastName} onChange={handleInputChange} placeholder="שם משפחה"></input>
-                <input type="text" name="Phone" value={childData.Phone} onChange={handleInputChange} placeholder="מספר טלפון"></input>
+                <input type="text" name="Id" value={childData.Id} onChange={handleInputChange} placeholder="מספר זהות" required></input>
+                <input type="text" name="FirstName" value={childData.FirstName} onChange={handleInputChange} placeholder="שם פרטי" required></input>
+                <input type="text" name="LastName" value={childData.LastName} onChange={handleInputChange} placeholder="שם משפחה" required></input>
+                <input type="text" name="Phone" value={childData.Phone} onChange={handleInputChange} placeholder="מספר טלפון" required></input>
                 <label htmlFor="challenges">אתגר</label>
-                <select id="challenges" name="Challenge" value={childData.Challenge} onChange={handleInputChange}>
+                <select id="challenges" name="Challenge" value={childData.Challenge} onChange={handleInputChange} required>
                     {challenges.map((c, index) => (
                         <option key={index} value={c}>
                             {c}
@@ -95,12 +94,12 @@ export default function AddChild() {
                     ))}
                     <option value="אחר">אחר</option>
                 </select>
-                <input type="date" name="BirthDate" value={childData.BirthDate} onChange={handleInputChange} placeholder="תאריך לידה"></input>
+                <input type="date" name="BirthDate" value={childData.BirthDate} onChange={handleInputChange} placeholder="תאריך לידה" required></input>
                 <input type="file" name="Image" onChange={handleFileChange} placeholder="תמונה"></input>
                 <label>כתובת</label>
-                <input type="text" name="City" value={childData.City} onChange={handleInputChange} placeholder="עיר"></input>
-                <input type="text" name="Street" value={childData.Street} onChange={handleInputChange} placeholder="רחוב"></input>
-                <input type="text" name="Building" value={childData.Building} onChange={handleInputChange} placeholder="בניין"></input>
+                <input type="text" name="City" value={childData.City} onChange={handleInputChange} placeholder="עיר" required></input>
+                <input type="text" name="Street" value={childData.Street} onChange={handleInputChange} placeholder="רחוב" required></input>
+                <input type="text" name="Building" value={childData.Building} onChange={handleInputChange} placeholder="בניין" required></input>
                 <textarea maxLength={4000} name="Comments" value={childData.Comments} onChange={handleInputChange} placeholder="כאן המקום להוסיף כל מה שחשוב לדעת על הילד שלכם"></textarea>
                 <input type="submit" value="שלח"></input>
             </form>

@@ -30,7 +30,7 @@ public class ChildrenController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<BlChild> PostAsync([FromForm]PostChild entity)
+    public async Task<BlChild> PostAsync(PostChild entity)
     {
         return await _child.PostAsync(entity);
     }

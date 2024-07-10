@@ -12,10 +12,17 @@ namespace Bl.Models
 
         public string Password { get; set; }
 
-        public TypeEnum Type { get; set; }
+        public string Type { get; set; }
 
-        public string ChildId { get; set; }
+        public BlChild Child { get; set; }
 
-        public string VolunteerId { get; set; }
+        public BlVolunteer Volunteer { get; set; }
+        public BlUser(string email, string password, string type, BlChild child, BlVolunteer volunteer) {
+            Email = email;
+            Password = password;
+            Type = type;
+            Child = child;
+            Volunteer = volunteer;
+        }
     }
 }

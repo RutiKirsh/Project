@@ -31,7 +31,7 @@ public class UserRepo : IUserRepo
 
     public async Task<User> GetSingleAsync(string email)
     {
-        return await notnimYadContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+        return await notnimYadContext.Users.Include(c => c.Child).ThenInclude(a => a.Address).Include(u => u.Volunteer).ThenInclude(a => a.Address).FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<User> PostAsync(User entity)

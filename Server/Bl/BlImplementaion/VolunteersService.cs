@@ -32,12 +32,12 @@ public class VolunteersService : IVolunteersService
 
     public async Task<BlVolunteer> GetSingleAsync(string id, BlUser user)
     {
-        if(user.Type != TypeEnum.VOLUNTEER)
+        if(user.Type != "volunteer")
         {
             throw new Exception("You do not have access permission.");
         }
         var volunteer = _volunteer.GetSingleAsync(id);
-        if(user.VolunteerId != id)
+        if(user.Volunteer.Id != id)
         {
             throw new Exception("You do not have access permission.");
         }
@@ -54,7 +54,12 @@ public class VolunteersService : IVolunteersService
         volunteer.Phone = entity.Phone;
         volunteer.BirthDate = entity.BirthDate;
         volunteer.Comments = entity.Comments;
-        volunteer.Address = entity.Address;
+        volunteer.Address = new Address()
+        {
+            City = entity.City,
+            Street = entity.Street,
+            Building = entity.Building
+        };
         var res = _volunteer.PostAsync(volunteer);
         var blVolunteer = new BlVolunteer((await res).Id, (await res).FirstName, (await res).LastName, (await res).Phone, (await res).BirthDate, (await res).Comments, (await res).Address);
         return blVolunteer;

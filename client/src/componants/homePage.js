@@ -18,7 +18,7 @@ export default function HomePage() {
                     הסיפור של "נותנים יד" הוא סיפור של אהבה, מסירות ואמונה בכוחו של האדם. אנחנו ממשיכים להתרחב ולגדול, וכל יום מביא איתו סיפורים חדשים של הצלחה והשראה. יחד, אנחנו בונים עתיד טוב יותר לילדים עם צרכים מיוחדים ומשפיעים על הקהילה כולה.
                 </center>
             </div>
-            <div class="paragraph" style={{backgroundColor: 'rgb(255, 238, 217)', width: '99vw'}}>
+            <div class="paragraph" style={{backgroundColor: 'rgb(255, 238, 217)', width: '98vw'}}>
 
             </div>
         </body>

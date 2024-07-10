@@ -21,6 +21,36 @@ body {
   font-family: easy;
 }
 
+.custom-select {
+  width: 70%;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.custom-select:hover {
+  background-color: #e0e0e0;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #f3e4e3;
+  background-color: #fff;
+}
+
+.custom-select option {
+  padding: 10px;
+  font-size: 16px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -20,8 +20,9 @@ public class BlVolunteer
     public DateTime BirthDate { get; set; }
 
     public string Comments { get; set; }
-
-    public virtual Address Address { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
+    public string Building { get; set; }
     public BlVolunteer(string id, string firstName, string lastName, string phone, DateTime birthDate, string comments, Address address)
     {
         Id = id;
@@ -30,6 +31,8 @@ public class BlVolunteer
         Phone = phone;
         BirthDate = birthDate;
         Comments = comments;
-        Address = address;    
+        City = address.City;
+        Street = address.Street;
+        Building = address.Building;
     }
 }
