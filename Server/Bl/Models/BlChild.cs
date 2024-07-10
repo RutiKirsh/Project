@@ -25,8 +25,6 @@ public class BlChild
     public string ImageURL { get; set; }
 
     public string Comments { get; set; }
-
-    public virtual Address Address { get; set; }
     public string City { get; set; }
     public string Street { get; set; }
     public string Building { get; set; }

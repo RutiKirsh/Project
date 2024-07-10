@@ -10,10 +10,15 @@ body {
 
 .paragraph {
   font-size: larger;
-  height: 100vh;
+  height: 750px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.paragraph-title{
+  font-family: easy;
 }
 
 .App-logo {

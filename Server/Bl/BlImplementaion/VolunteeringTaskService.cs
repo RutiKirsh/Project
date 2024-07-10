@@ -17,7 +17,7 @@ public class VolunteeringTaskService : IVolunteeringTaskService
     private IRepository<VolunteeringTask> _volunteeringTask;
     public VolunteeringTaskService(DalManager manager)
     {
-        //this._volunteeringTask = manager.volunteeringTask;  
+        this._volunteeringTask = manager.volunteeringTask;  
     }
 
     public Task<BlVolunteeringTask> DeleteAsync(int id, BlUser user)

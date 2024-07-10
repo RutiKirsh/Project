@@ -61,7 +61,7 @@ public class ChildService : IChildService
         child.BirthDate = entity.BirthDate;
         child.Image = Path.Combine("DB", "Uploads", entity.Image.FileName);
         child.Comments = entity.Comments;
-        child.Address = new Address {City = entity.City, Street = entity.Street, Building = entity.Street};
+        child.Address = new Address {City = entity.City, Street = entity.Street, Building = entity.Building};
 
         var res = _children.PostAsync(child);
         var blChild = new BlChild((await res).Id, (await res).FirstName, (await res).LastName, (await res).Phone, (await res).Challenge, (await res).BirthDate, (await res).Image, (await res).Comments, (await res).Address);

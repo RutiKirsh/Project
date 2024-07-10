@@ -1,4 +1,5 @@
-﻿using Bl.BlApi;
+﻿using Bl;
+using Bl.BlApi;
 using Bl.Models;
 using Common;
 using Dal.DalApi;
@@ -15,9 +16,9 @@ namespace Server.Controllers;
 public class VolunteeringTasksController : ControllerBase
 {
     IVolunteeringTaskService _volunteeringTasksRepository;
-    public VolunteeringTasksController(IVolunteeringTaskService repository)
+    public VolunteeringTasksController(BlManager manager)
     {
-        this._volunteeringTasksRepository = repository;
+        this._volunteeringTasksRepository = manager.voluteeringTaskService;
     }
     [HttpGet]
     public async Task<PagedList<TaskList>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
