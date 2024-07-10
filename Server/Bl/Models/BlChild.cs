@@ -28,11 +28,6 @@ public class BlChild
     public string City { get; set; }
     public string Street { get; set; }
     public string Building { get; set; }
-
-    public virtual Address Address { get; set; }
-    public string City { get; set; }
-    public string Street { get; set; }
-    public string Building { get; set; }
     public BlChild(string id, string firstName, string lastName, string phone, string challenge, DateTime dateTime, string image, string comments, Address address)
     {
         Id = id;

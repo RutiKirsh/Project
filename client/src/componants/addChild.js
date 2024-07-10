@@ -63,11 +63,7 @@ export default function AddChild() {
             formData.append("Street", childData.Street);
             formData.append("Building", childData.Building);
             formData.append("Comments", childData.Comments);
-<<<<<<< HEAD
-=======
-           
->>>>>>> 2a7e127db99ebc7039089cb765be50512f3505a9
-
+            
             const response = await fetch("https://localhost:7190/api/children", {
                 method: "POST",
                 body: formData
