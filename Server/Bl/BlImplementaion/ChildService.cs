@@ -59,7 +59,7 @@ public class ChildService : IChildService
         child.Phone = entity.Phone;
         child.Challenge = entity.Challenge;
         child.BirthDate = entity.BirthDate;
-        child.Image = filePath;
+        child.Image = Path.Combine("DB", "Uploads", entity.Image.FileName);
         child.Comments = entity.Comments;
         child.Address = new Address {City = entity.City, Street = entity.Street, Building = entity.Street};
 
