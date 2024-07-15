@@ -15,24 +15,14 @@ public class BlVolunteeringTask
 
     public DateTime? End { get; set; } = null;
 
-    public string ChildId { get; set; }
-
-    public bool? Done { get; set; } = false;
-
-    public string VolunteerId { get; set; } = null;
-
-    public string Type { get; set; } = null;
+    public string Place { get; set; }
 
     public string Comments { get; set; } = null;
-    public BlVolunteeringTask(int id, DateTime date, string type, string childId, string volunteerId, DateTime? end, bool? done, string comments)
+    public BlVolunteeringTask(int id, DateTime date, DateTime? end, string? comments)
     {
         Id = id;
         Date = date;
-        Type = type;
-        ChildId = childId;
-        VolunteerId = volunteerId;
         End = end;
-        Done = done;
         Comments = comments;    
     }
 }

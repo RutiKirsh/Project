@@ -15,9 +15,11 @@ namespace Bl.BlImplementaion;
 public class VolunteeringTaskService : IVolunteeringTaskService
 {
     private IRepository<VolunteeringTask> _volunteeringTask;
+    private IUserRepo _userRepo;
     public VolunteeringTaskService(DalManager manager)
     {
-        this._volunteeringTask = manager.volunteeringTask;  
+        this._volunteeringTask = manager.volunteeringTask;
+        this._userRepo = manager.user;
     }
 
     public Task<BlVolunteeringTask> DeleteAsync(int id, BlUser user)
@@ -31,36 +33,50 @@ public class VolunteeringTaskService : IVolunteeringTaskService
         var tasks = _volunteeringTask.GetAllAsync(queryParams);
         var result = new PagedList<TaskList>((await tasks).TotalItems, (await tasks).CurrentPage, (await tasks).PageSize, new List<TaskList>());
         foreach (var task in await tasks) {
-            result.Add(new TaskList(task.Id, task.Date, task.Type, task.Comments, task.Done, task.End));
+            result.Add(new TaskList(task.Id, task.Date, task.Type, task.Child.Address.City, task.End));
         }
         return result;
     }
 
-    public async Task<BlVolunteeringTask> GetSingleAsync(int id, BlUser user)
+    public async Task<BlVolunteeringTask> GetSingleAsync(int id, string email, string password)
     {
-        var task = _volunteeringTask.GetSingleAsync(id);
-        if (user.Child.Id != task.Result.ChildId || user.Type != "volunteer")
+        var user = await _userRepo.GetSingleAsync(email);
+        if (user == null || user.Password != password) {
+            throw new Exception("You do not have access permission");
+        }
+        var task = await _volunteeringTask.GetSingleAsync(id);
+        if (user.Type.Equals("child") && user.Child.Id != task.ChildId)
         {
             throw new Exception("You do not have access permission.");
         }
-        BlVolunteeringTask res = new((await task).Id, (await task).Date, (await task).Type, (await task).ChildId, (await task).VolunteerId, (await task).End, (await task).Done, (await task).Comments);
-        return res;
+        if (user.Type.Equals("volunteer"))
+        {
+            return new TaskForVolunteer(task.Id, task.Date, task.Child.FirstName, task.Child.Image, task.Child.Address.City, task.Child.Comments, task.End, task.Comments);
+        }
+        return new ExtendsVolunteeringTask(task.Id,
+            task.Date,
+            new BlChild(task.Child.Id, task.Child.FirstName, task.Child.LastName, task.Child.Phone, task.Child.Challenge, task.Child.BirthDate, task.Child.Image, task.Child.Comments, task.Child.Address),
+            task.Volunteer, task.Done, task.End, task.Comments);
     }
     //לתקן כשמרוכזים!!!
 
-    public async Task<BlVolunteeringTask> PostAsync(BlVolunteeringTask entity)
+    public async Task<BlVolunteeringTask> PostAsync(PostTask entity, string email, string password)
     {
+        var user = await _userRepo.GetSingleAsync(email);
+        if (user == null || user.Password != password || !user.Type.Equals("child"))
+        {
+            throw new Exception("You do not have access permission");
+        }
         var volunteeringTask = new VolunteeringTask();
-        volunteeringTask.Id = entity.Id;
         volunteeringTask.Date = entity.Date;
-        volunteeringTask.Type = entity.Type;
-        volunteeringTask.ChildId = entity.ChildId;
-        volunteeringTask.VolunteerId = entity.VolunteerId;
+        volunteeringTask.Type = entity.Place;
+        volunteeringTask.ChildId = user.Child.Id;
+        volunteeringTask.VolunteerId = user.VolunteerId;
         volunteeringTask.End = entity.End;
-        volunteeringTask.Done = entity.Done;
+        volunteeringTask.Done = false;
         volunteeringTask.Comments = entity.Comments;
         var res = _volunteeringTask.PostAsync(volunteeringTask);
-        var blVolunteeringTask = new BlVolunteeringTask((await res).Id, (await res).Date, (await res).Type, (await res).ChildId, (await res).VolunteerId, (await res).End, (await res).Done, (await res).Comments);
+        var blVolunteeringTask = new BlVolunteeringTask((await res).Id, (await res).Date,(await res).End, (await res).Comments);
         return blVolunteeringTask;
     }
 

@@ -1,4 +1,4 @@
-export const logIn = (user = {}) => {
+export const logIn = (user) => {
     return{
         type: "LOGIN",
         user

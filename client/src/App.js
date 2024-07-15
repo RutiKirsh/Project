@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import HomePage from './componants/homePage';
 import Header from './componants/header';
+import Tasks from './componants/tasks';
 import LogIn from './componants/logIn';
 
 function App() {
@@ -16,8 +17,8 @@ function App() {
         <body style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
         <HomePage></HomePage>
         <LogIn></LogIn>
-        {/* <Tasks></Tasks>
-        <AddChild></AddChild> */}
+        <Tasks></Tasks>
+        {/* <AddChild></AddChild> */}
         </body>
       </Provider>
     </div>
