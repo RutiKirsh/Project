@@ -35,14 +35,21 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
         await notnimYadContext.SaveChangesAsync();
         return entity;
     }
-    public Task<VolunteeringTask> PutAsync(int id, VolunteeringTask item)
+    public async Task<VolunteeringTask> PutAsync(VolunteeringTask item)
     {
-        Task<VolunteeringTask> volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(v => v.Id == id);
-        /*        if (volunteeringTask == null)
-                {
-                    volunteeringTask = item.Comments;
-                }*/
-        return volunteeringTask;
+        var volunteeringTask = notnimYadContext.VolunteeringTasks.FirstOrDefaultAsync(v => v.Id == item.Id);
+        if (volunteeringTask == null)
+        {
+            throw new Exception("can't find item");
+        }
+        volunteeringTask.Result.Date = item.Date;
+        volunteeringTask.Result.End = item.End;
+        volunteeringTask.Result.Done = item.Done;
+        volunteeringTask.Result.VolunteerId = item.VolunteerId;
+        volunteeringTask.Result.Comments = item.Comments;
+        volunteeringTask.Result.Type = item.Type;
+        await notnimYadContext.SaveChangesAsync();
+        return await GetSingleAsync(volunteeringTask.Result.Id);
     }
     //דרוש תיקון!!!
 

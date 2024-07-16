@@ -6,6 +6,7 @@ import HomePage from './componants/homePage';
 import Header from './componants/header';
 import Tasks from './componants/tasks';
 import LogIn from './componants/logIn';
+import AddChild from './componants/addChild';
 
 function App() {
   return (

@@ -12,8 +12,8 @@ public class ExtendsVolunteeringTask: BlVolunteeringTask
     public bool? Done { get; set; } = false;
     public BlChild Child { get; set; }
     public BlVolunteer Volunteer { get; set; }
-    public ExtendsVolunteeringTask(int id, DateTime date, BlChild child, Volunteer volunteer, bool? done, DateTime? end, string? comments):
-        base(id, date, end, comments)
+    public ExtendsVolunteeringTask(int id, DateTime date, string place, BlChild child, Volunteer volunteer, bool? done, DateTime? end, string? comments):
+        base(id, date, place, end, comments)
     {
         Child = child;
         if (volunteer != null)

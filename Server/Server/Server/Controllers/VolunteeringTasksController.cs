@@ -2,10 +2,6 @@
 using Bl.BlApi;
 using Bl.Models;
 using Common;
-using Dal.DalApi;
-using Dal.DalImplementation;
-using Dal.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
 
@@ -39,6 +35,11 @@ public class VolunteeringTasksController : ControllerBase
     public async Task<BlVolunteeringTask> PutAsync([FromQuery] BlVolunteeringTask item, [FromBody] BlUser user)
     {
         return await _volunteeringTasksRepository.PutAsync(item, user);
+    }
+    [HttpPut("do/{id}/{email}/{password}")]
+    public async Task<BlVolunteeringTask> DoTsakAsync(int id, string email, string password)
+    {
+        return await _volunteeringTasksRepository.DoTaskAsync(id, email, password);
     }
     [HttpDelete("{id}")]
     public async Task<BlVolunteeringTask> DeleteAsync(int id, [FromBody] BlUser user)

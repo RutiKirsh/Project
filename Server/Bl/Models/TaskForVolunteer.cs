@@ -17,12 +17,12 @@ public class TaskForVolunteer: BlVolunteeringTask
 
     public string City { get; set; }
 
-    public TaskForVolunteer(int id, DateTime date, string childName, string image, string city, string? childComments, DateTime? end, string? comments):
-        base(id, date, end, comments)
+    public TaskForVolunteer(int id, DateTime date, string place, string childName, string image, string city, string childComments, DateTime? end, string comments):
+        base(id, date, place, end, comments)
     {
         ChildName = childName;
         Image = image;
         City = city;
-        ChildComments = comments;
+        ChildComments = childComments;
     }
 }
