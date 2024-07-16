@@ -20,6 +20,7 @@ export default function LogIn() {
                 sessionStorage.setItem("notnimYadUser", JSON.stringify(myUser));
                 console.log("User logged in successfully:", myUser);
                 dispatch(logIn(myUser));
+                console.log('globalUser', globalUser);
             } else {
                 throw new Error("Network response was not ok");
             }
@@ -36,7 +37,7 @@ export default function LogIn() {
 
     return (
         <div class="paragraph" style={{ width: '98vw' }}>
-            <img src={babushka} style={{ height: '50px', width: '60px' }}></img>
+            <img src={babushka} alt="babushka" style={{ height: '50px', width: '60px' }}></img>
             <h1 class="paragraph-title" style={{ fontSize: '50px', marginTop: '-3.2vh' }}>שמחים לפגוש אתכם שוב</h1>
             <form onSubmit={handleSubmit} style={{
                 width: '45%',

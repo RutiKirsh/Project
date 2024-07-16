@@ -25,15 +25,15 @@ public class VolunteeringTasksController : ControllerBase
     {
         return await _volunteeringTasksRepository.GetAllAsync(queryParams);
     }
-    [HttpGet("{id}")]
-    public async Task<BlVolunteeringTask> GetSingleAsync(int id, [FromBody] BlUser user)
+    [HttpGet("{id}/{email}/{password}")]
+    public async Task<BlVolunteeringTask> GetSingleAsync(int id, string email, string password)
     {
-        return await _volunteeringTasksRepository.GetSingleAsync(id, user);
+        return await _volunteeringTasksRepository.GetSingleAsync(id, email, password);
     }
-    [HttpPost]
-    public async Task<BlVolunteeringTask> PostAsync(BlVolunteeringTask entity)
+    [HttpPost("{email}/{password}")]
+    public async Task<BlVolunteeringTask> PostAsync(PostTask entity, string email, string password)
     {
-        return await _volunteeringTasksRepository.PostAsync(entity);
+        return await _volunteeringTasksRepository.PostAsync(entity, email, password);
     }
     [HttpPut("{id}")]
     public async Task<BlVolunteeringTask> PutAsync([FromQuery] BlVolunteeringTask item, [FromBody] BlUser user)

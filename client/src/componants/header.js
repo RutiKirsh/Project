@@ -1,5 +1,5 @@
 import logo from '../images/logo.png'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from '../redux/actions/logIn';
 import '../css/header.css';
@@ -10,34 +10,40 @@ export default function Header() {
     const [showPopover, setShowPopover] = useState(false);
     const [myBackgroundColor, setMyBackgroundColor] = useState('rgb(227, 200, 184)');
 
-    function setNavColor() {
-        setMyBackgroundColor('rgb(255, 255, 255)');
-    }
-
-    window.addEventListener('scroll', setNavColor);
-
-    function uploadUser() {
-        let user = sessionStorage.getItem('notnimYadUser');
-        if (user) {
-            console.log(JSON.parse(user));
-            dispatch(logIn(JSON.parse(user)));
-            console.log(userDetails);
-        } else {
-            dispatch(logIn());
+    useEffect(() => {
+        function setNavColor() {
+            setMyBackgroundColor('rgb(255, 255, 255)');
         }
-    }
+
+        window.addEventListener('scroll', setNavColor);
+
+        return () => {
+            window.removeEventListener('scroll', setNavColor);
+        };
+    }, []);
+
+    useEffect(() => {
+        function uploadUser() {
+            let user = sessionStorage.getItem('notnimYadUser');
+            if (user) {
+                dispatch(logIn(JSON.parse(user)));
+            }
+        }
+
+        uploadUser();
+    }, [dispatch]);
 
     const togglePopover = () => {
         setShowPopover(!showPopover);
-        console.log('togglePopover');
     };
+
     return (
-        <header class="navbar fixed-top navbar-expand-lg white" style={{ backgroundColor: myBackgroundColor, height: '11vh', width: '100vw', boxShadow: '5 5 10 rgba(0, 0, 0, 0.1)', borderRadius: "0 0 0 40px", borderWidth: "0 0 1.5px 1.5px", borderStyle: 'solid', borderColor: 'rgb(227, 200, 184)' }} onLoad={uploadUser}>
-            <div class="container-fluid"><img src={logo} alt='logo' height='100vh' style={{ float: 'right' }} /></div>
-            <div class="d-flex" style={{ display: 'flex', alignItems: 'flex-end', float: 'left', height: '100', marginLeft: '10px', marginTop: '2.5vh' }}>
+        <header className="navbar fixed-top navbar-expand-lg white" style={{ backgroundColor: myBackgroundColor, height: '11vh', width: '100vw', boxShadow: '5 5 10 rgba(0, 0, 0, 0.1)', borderRadius: "0 0 0 40px", borderWidth: "0 0 1.5px 1.5px", borderStyle: 'solid', borderColor: 'rgb(227, 200, 184)' }}>
+            <div className="container-fluid"><img src={logo} alt='logo' height='100vh' style={{ float: 'right' }} /></div>
+            <div className="d-flex" style={{ display: 'flex', alignItems: 'flex-end', float: 'left', height: '100', marginLeft: '10px', marginTop: '2.5vh' }}>
                 <div style={{ fontFamily: 'easy', fontSize: 'large', fontWeight: 'bold', width: '100px' }}>כאן כדי לתת יד</div>
-                <div class='user-details' style={{ textAlign: 'left', marginRight: '20px' }}>
-                    <button onClick={togglePopover} style={{ backgroundColor: 'lightgray', borderRadius: '50%', padding: '10px', display: 'inline-block', borderColor: 'grey', aspectRatio: '1:1' }}>
+                <div className='user-details' style={{ textAlign: 'left', marginRight: '20px' }}>
+                    <button onClick={togglePopover} style={{ backgroundColor: 'lightgray', borderRadius: '50%', padding: '5px', display: 'inline-block', borderColor: 'grey', height: 37, width: 37 }}>
                         <svg width="15" height="15" viewBox="0 0 24 24"
                             fill="none" xmlns="http://www.w3.org/2000/svg" >
                             <path d="M12 12C15.3137 12 18 9.31371 18 6C18 2.68629 15.3137 0 12 0C8.68629 0 6 2.68629 6 6C6 9.31371 8.68629 12 12 12ZM12 14C7.58172 14 0 16.2386 0 20.6667V24H24V20.6667C24 16.2386 16.4183 14 12 14Z"
@@ -45,21 +51,20 @@ export default function Header() {
                         </svg>
                     </button>
                     {showPopover && (
-                        (Object.keys(userDetails).length > 0) && (
-                            (userDetails.Child != null) && (
-                                <div className="popover">
-                                    <h2>{userDetails.child.FirstName} {userDetails.Child.LastName}</h2>
+                        <div className="popover">
+                            {userDetails.child && (
+                                <>
+                                    <h2>{userDetails.child.FirstName} {userDetails.child.LastName}</h2>
                                     <p><strong>Name:</strong> {userDetails.name}</p>
-                                </div>)
-                                (userDetails.volunteer != null) && (
-                                <div className="popover">
+                                </>
+                            )}
+                            {userDetails.volunteer && (
+                                <>
                                     <h2>{userDetails.volunteer.firstName} {userDetails.volunteer.lastName}</h2>
-                                    <p><strong>Name:</strong> {userDetails.name}</p>
-                                </div>)
-                                )
-                            )
-
-                    }
+                                </>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </header>
