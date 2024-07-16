@@ -1,5 +1,5 @@
 import './App.css';
-import { Scrollbars } from 'react-custom-scrollbars-2';
+// import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import HomePage from './componants/homePage';
