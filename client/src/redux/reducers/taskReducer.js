@@ -1,6 +1,6 @@
 const tasks = [];
 export const taskReducer = (state = tasks, action) => {
-    switch(action.type){
+    switch (action.type) {
         case "ADDONETASK": {
             return [...state, action.task];
         }
@@ -11,8 +11,10 @@ export const taskReducer = (state = tasks, action) => {
             return state.filter((item) => item.Id !== action.task.Id);
         }
         case "UPDATETASK": {
-            console.log(action.task);
-            return state.map((item) => item.Id === action.task.Id? {...item,...action.task} : item);
+            if (action.task != null) {
+                return state.map((task) => action.task.id == task.id ? { ...task, ...action.task }  : task);
+            }
+            return state;
         }
         default: return state;
     }

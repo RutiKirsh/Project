@@ -2,10 +2,6 @@
 using Bl.BlApi;
 using Bl.Models;
 using Common;
-using Dal.DalApi;
-using Dal.DalImplementation;
-using Dal.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
 
@@ -21,9 +17,16 @@ public class VolunteeringTasksController : ControllerBase
         this._volunteeringTasksRepository = manager.voluteeringTaskService;
     }
     [HttpGet]
-    public async Task<PagedList<TaskList>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
+    public async Task<PagedList<BlVolunteeringTask>> GetAllAsync([FromQuery] BaseQueryParams queryParams)
     {
         return await _volunteeringTasksRepository.GetAllAsync(queryParams);
+    }
+
+    [HttpGet("{email}/{password}")]
+    public async Task<PagedList<ExtendsVolunteeringTask>> GetAllAsync([FromQuery] BaseQueryParams queryParams, string email, string password)
+    {
+        var res = await _volunteeringTasksRepository.GetAllAsync(queryParams, email, password);
+        return res;
     }
     [HttpGet("{id}/{email}/{password}")]
     public async Task<BlVolunteeringTask> GetSingleAsync(int id, string email, string password)
@@ -40,10 +43,15 @@ public class VolunteeringTasksController : ControllerBase
     {
         return await _volunteeringTasksRepository.PutAsync(item, user);
     }
-    [HttpDelete("{id}")]
-    public async Task<BlVolunteeringTask> DeleteAsync(int id, [FromBody] BlUser user)
+    [HttpPut("do/{id}/{email}/{password}")]
+    public async Task<BlVolunteeringTask> DoTsakAsync(int id, string email, string password)
     {
-        return await _volunteeringTasksRepository.DeleteAsync(id, user);
+        return await _volunteeringTasksRepository.DoTaskAsync(id, email, password);
+    }
+    [HttpDelete("{id}/{email}/{password}")]
+    public async Task<BlVolunteeringTask> DeleteAsync(int id, string email, string password)
+    {
+        return await _volunteeringTasksRepository.DeleteAsync(id, email, password);
     }
 
 

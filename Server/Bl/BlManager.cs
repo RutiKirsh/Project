@@ -20,7 +20,8 @@ public class BlManager
     public VolunteersService volunteersService { get; }
     public UserService userService { get; }
     public InfoService infoService { get; }
-    public BlManager(string connection)
+    //public GmailService gmailService { get; }
+    public BlManager(string connection/* string clientId, string clientSecret*/)
     {
         ServiceCollection services = new ServiceCollection();
         services.AddScoped<DalManager>(d => new DalManager(connection));
@@ -29,6 +30,7 @@ public class BlManager
         services.AddScoped</*IVolunteersRepo, */VolunteersService>();
         services.AddScoped< UserService>();
         services.AddScoped< InfoService>();
+        //services.AddScoped< GmailService>(g => new GmailService(clientId, clientSecret));
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         dalManager = serviceProvider.GetService<DalManager>();
         child = serviceProvider.GetService<ChildService>();
