@@ -17,13 +17,11 @@ public class BlVolunteeringTask
 
     public string Place { get; set; }
 
-    public string Comments { get; set; } = null;
-    public BlVolunteeringTask(int id, DateTime date, string place, DateTime? end, string? comments)
+    public BlVolunteeringTask(int id, DateTime date, string place, DateTime? end)
     {
         Id = id;
         Date = date;
         Place = place;
-        End = end;
-        Comments = comments;    
+        End = end;    
     }
 }

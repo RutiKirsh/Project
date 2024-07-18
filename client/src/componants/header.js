@@ -53,7 +53,7 @@ export default function Header() {
                     {showPopover && (
                         <div className="popover">
                             {userDetails.child && (
-                                <p>{userDetails.child.FirstName} {userDetails.child.LastName}</p>
+                                <p>{userDetails.child.firstName} {userDetails.child.lastName}</p>
                             )}
                             {userDetails.volunteer && (
                                 <p>{userDetails.volunteer.firstName} {userDetails.volunteer.lastName}</p>

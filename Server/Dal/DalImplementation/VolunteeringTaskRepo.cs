@@ -18,9 +18,17 @@ public class VolunteeringTaskRepo : IRepository<VolunteeringTask>
         this.notnimYadContext = notnimYadContext;
     }
 
-    public async Task<PagedList<VolunteeringTask>> GetAllAsync(BaseQueryParams queryParams)
+    public async Task<PagedList<VolunteeringTask>> GetAllAsync(BaseQueryParams queryParams, string childId)
     {
-        var query = notnimYadContext.VolunteeringTasks.Where(task => task.Done != true).Include(task => task.Child).ThenInclude(child => child.Address).AsQueryable();
+        IQueryable<VolunteeringTask> query;
+        if (childId == null)
+        {
+            query = notnimYadContext.VolunteeringTasks.Where(task => task.Done != true).Include(task => task.Child).ThenInclude(child => child.Address).AsQueryable();
+        }
+        else
+        {
+            query = notnimYadContext.VolunteeringTasks.Where(task => task.ChildId == childId).Include(task => task.Child).ThenInclude(child => child.Address).Include(v => v.Volunteer).ThenInclude(a => a.Address).AsQueryable();
+        }
         return await PagedList<VolunteeringTask>.ToPagedListAsync(query.OrderBy(task => task.Date), queryParams.PageNumber, queryParams.PageSize);
     }
 

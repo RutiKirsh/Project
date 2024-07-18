@@ -12,7 +12,6 @@ export const taskReducer = (state = tasks, action) => {
         }
         case "UPDATETASK": {
             if (action.task != null) {
-                console.log(action.task.id);
                 return state.map((task) => action.task.id == task.id ? { ...task, ...action.task }  : task);
             }
             return state;

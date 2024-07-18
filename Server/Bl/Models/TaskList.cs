@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Bl.Models;
 
-public class TaskList
+public class TaskList : BlVolunteeringTask
 {
-    public int Id { get; set; }
-    public DateTime Date { get; set; }
-    public DateTime? End { get; set; }
-    public string Place { get; set; }
     public string City { get; set; }
-    public TaskList(int id,DateTime date, string place, string city, DateTime? end)
+    public TaskList(int id,DateTime date, string place, string city, DateTime? end):
+        base(id, date, place, end)
     {
         this.Id = id;
         this.Date = date;

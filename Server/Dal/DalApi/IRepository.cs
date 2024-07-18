@@ -9,7 +9,7 @@ namespace Dal.DalApi;
 
 public interface IRepository<T>
 {
-    Task<PagedList<T>> GetAllAsync(BaseQueryParams queryParams);
+    Task<PagedList<T>> GetAllAsync(BaseQueryParams queryParams, string childId);
     Task<T> GetSingleAsync(int id);
     Task<T> PostAsync(T entity);
     Task<T> PutAsync(T item);
