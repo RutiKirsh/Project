@@ -6,6 +6,7 @@ import HomePage from './componants/homePage';
 import Header from './componants/header';
 import Tasks from './componants/tasks';
 import LogIn from './componants/logIn';
+// import Navigator from './componants/navigator';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <body style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
         <HomePage></HomePage>
         <LogIn></LogIn>
+        {/* <Navigator></Navigator> */}
         <Tasks></Tasks>
         {/* <AddChild></AddChild> */}
         </body>
