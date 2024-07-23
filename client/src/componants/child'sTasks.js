@@ -46,13 +46,27 @@ export default function ChildTasks() {
                 console.log(tasks);
             }
         }
-    };
+    };  
 
-    const deleteTask = async(id) => {
-        const item = await fetchData(`https://localhost:7190/api/volunteeringtasks/${user.email}/${user.password}`);
-        var temp = tasks.filter((item) => item.id !== id);
-        setTasks(temp);
-        setSelectedItem(null);
+    const deleteTask = async (id) => {
+        try {
+            const response = await fetch(`https://localhost:7190/api/volunteeringtasks/${id}/${user.email}/${user.password}`, { method: 'DELETE' });
+            if(!response  || !response.ok){
+                console.error(`Error deleting task ${id}`);
+                return;
+            }
+            const data = response.json();
+            if (data[id] != id){
+                console.error(`Error deleting task ${id}: ${data[id]} is not the correct id.`);
+                return;
+            }
+            var temp = tasks.filter((item) => item.id !== id);
+            setTasks(temp);
+            setSelectedItem(null);
+        }
+        catch (e) {
+            console.error(e);
+        }
     }
 
     useEffect(() => {
@@ -71,7 +85,7 @@ export default function ChildTasks() {
                 <div key={index}>
                     {new Date(item.date).toLocaleDateString()} {new Date(item.date).getHours()}     {item.end} {item.place}
                     <br />
-                    <button type="button" onClick={() => {setSelectedItem(item); console.log(tasks)}} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ backgroundColor: "#FB4A45", border: "#FB4A45" }}>
+                    <button type="button" onClick={() => { setSelectedItem(item); console.log(tasks) }} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ backgroundColor: "#FB4A45", border: "#FB4A45" }}>
                         לפרטים נוספים
                     </button>
                 </div>
@@ -84,20 +98,20 @@ export default function ChildTasks() {
                     body={
                         <p>ביום {new Date(selectedItem.date).toLocaleDateString()} בשעה {formatTime(selectedItem.date)} יבואו לשמור עלי {selectedItem.end && (`עד השעה ${formatTime(selectedItem.end)}`)} {selectedItem.place}.
                             {selectedItem.volunteer && (
-                                <p>למתנדבת שתבוא להיות איתי קוראים {selectedItem.volunteer.firstName } {selectedItem.volunteer.lastName } ומספר הטלפון שלה הוא {selectedItem.volunteer.phone }.</p>
+                                <p>למתנדבת שתבוא להיות איתי קוראים {selectedItem.volunteer.firstName} {selectedItem.volunteer.lastName} ומספר הטלפון שלה הוא {selectedItem.volunteer.phone}.</p>
                             )}
                             {!selectedItem.volunteer && (
                                 <p>עדיין לא יודעים מי המתנדבת שתבוא להיות איתי.</p>
                             )}
                         </p>
                     }
-                footer={
-                    !user.volunteer && (
-                        <button onClick={() => {
-                            deleteTask(selectedItem.id);
-                        }} type="button" className="btn btn-secondary" data-bs-dismiss="modal">מתאים לי</button>
-                    )
-                }
+                    footer={
+                        !user.volunteer && (
+                            <button onClick={() => {
+                                deleteTask(selectedItem.id);
+                            }} type="button" className="btn btn-secondary" data-bs-dismiss="modal">מתאים לי</button>
+                        )
+                    }
                 />
             )}
 
