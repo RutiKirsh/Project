@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import babushka from '../images/babushka.png';
 import '../css/home_page.css';
 
 export default function HomePage() {
     return (
-        <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems:'center', width: '98vw' }}>
+        <div style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: 'center', width: '98vw' }}>
             <div className="paragraph" style={{ width: '60vw' }}>
                 <img src={babushka} alt="babushka" style={{ height: '50px', width: '60px' }} />
                 <h1 className="paragraph-title" style={{ marginTop: '-3.2vh' }}>הסיפור שלנו</h1>
@@ -23,23 +24,30 @@ export default function HomePage() {
                     <div className="info">
                         <h2 className="info-title">5000+</h2>
                         <div className="info-paragraph"></div>
+                        תיאומים בין מתנדבות לילדים בוצעו בהצלחה במהלך השנה
                     </div>
                     <div className="info">
                         <h2 className="info-title">30</h2>
                         <div className="info-paragraph">ימי פעילות וטיולים נערכו במהלך השנה החולפת בעתויים מיוחדים על מנת להעניק לילדים חוויות משמעותיות ולחזק את הקשרים החברתיים ביניהם.
-
-
-
-
-
-
-</div>
+                        </div>
                     </div>
                     <div className="info">
-                        <h2 className="info-title">7 נופשונים</h2>
-                        <div className="info-paragraph"></div>
+                        <h2 className="info-title">7</h2>
+                        <div className="info-paragraph">
+                            נופשונים במהלך השנה-נופשון קיץ מיוחד בן 5 ימים, ושבתות נופשון מיוחדות נוספות במהלך השנה.
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div className="paragraph" style={{ backgroundColor: 'rgb(255, 255, 255)', width: '98vw' }}>
+                <h1 className="paragraph-title">מעוניינת להצטרף למערך המתנדבות?</h1>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '60%', marginTop: '10vh' }}>
+                    לצפיה בכל המשימות לחצי 
+                    <Link to="/tasks" style={{ textDecoration: 'none' }}>
+                        כאן
+                    </Link>
+                </div>
+    
             </div>
         </div>
     )

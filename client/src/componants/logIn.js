@@ -21,6 +21,7 @@ export default function LogIn() {
                 console.log("User logged in successfully:", myUser);
                 dispatch(logIn(myUser));
                 console.log('globalUser', globalUser);
+                window.location.href = "/account";
             } else {
                 throw new Error("Network response was not ok");
             }

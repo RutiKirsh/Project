@@ -51,17 +51,9 @@ export default function AddChild() {
 
         try {
             const formData = new FormData();
-            formData.append("Id", childData.Id);
-            formData.append("FirstName", childData.FirstName);
-            formData.append("LastName", childData.LastName);
-            formData.append("Phone", childData.Phone);
-            formData.append("Challenge", childData.Challenge);
-            formData.append("BirthDate", childData.BirthDate);
-            formData.append("Image", childData.Image);
-            formData.append("City", childData.City);
-            formData.append("Street", childData.Street);
-            formData.append("Building", childData.Building);
-            formData.append("Comments", childData.Comments);
+            Object.keys(childData).forEach(key => {
+                formData.append(key, childData[key]);
+            });
 
             const response = await fetch("https://localhost:7190/api/children", {
                 method: "POST",
@@ -79,46 +71,7 @@ export default function AddChild() {
     };
 
     return (
-        <div style={{width: '50%'}}>
-            {/* <form onSubmit={handleSubmit}>
-                <input type="text" name="Id" value={childData.Id} onChange={handleInputChange} placeholder="מספר זהות" required />
-                <input type="text" name="FirstName" value={childData.FirstName} onChange={handleInputChange} placeholder="שם פרטי" required />
-                <input type="text" name="LastName" value={childData.LastName} onChange={handleInputChange} placeholder="שם משפחה" required />
-                <input type="text" name="Phone" value={childData.Phone} onChange={handleInputChange} placeholder="מספר טלפון" required />
-                <label htmlFor="challenges">אתגר</label>
-                <select id="challenges" name="Challenge" value={childData.Challenge} onChange={handleInputChange} required>
-                    {challenges.map((c, index) => (
-                        <option key={index} value={c}>
-                            {c}
-                        </option>
-                    ))}
-                    <option value="אחר">אחר</option>
-                </select>
-                {childData.Challenge === "אחר" && (
-                    <input
-                        type="text"
-                        name="Challenge"
-                        value={childData.Challenge || ''}
-                        onChange={handleInputChange}
-                        placeholder="אנא ציין את האתגר"
-                        required
-                    />
-                )}
-                <input type="date" name="BirthDate" value={childData.BirthDate} onChange={handleInputChange} placeholder="תאריך לידה" required />
-                <input type="file" name="Image" onChange={handleFileChange} placeholder="תמונה" />
-                <label>כתובת</label>
-                <input type="text" name="City" value={childData.City} onChange={handleInputChange} placeholder="עיר" required />
-                <input type="text" name="Street" value={childData.Street} onChange={handleInputChange} placeholder="רחוב" required />
-                <input type="text" name="Building" value={childData.Building} onChange={handleInputChange} placeholder="בניין" required />
-                <textarea
-                    maxLength={4000}
-                    name="Comments"
-                    value={childData.Comments}
-                    onChange={handleInputChange}
-                    placeholder="כאן המקום להוסיף כל מה שחשוב לדעת על הילד שלכם"
-                />
-                <input type="submit" value="שלח" />
-            </form> */}
+        <div style={{ width: '50%' }}>
             <form
                 onSubmit={handleSubmit}
                 style={{
@@ -131,61 +84,30 @@ export default function AddChild() {
                     borderColor: 'rgb(227, 200, 184)',
                 }}
             >
-                <div className="row g-3">
-                    <label htmlFor="Id" className="form-label col">מספר זהות</label>
-                    <input
-                        id="Id"
-                        type="text"
-                        name="Id"
-                        className="form-control col"
-                        value={childData.Id}
-                        onChange={handleInputChange}
-                        placeholder="מספר זהות"
-                        required
-                    />
-                </div>
-
-                <div className="row g-3">
-                    <label htmlFor="FirstName" className="form-label col">שם פרטי</label>
-                    <input
-                        id="FirstName"
-                        type="text"
-                        name="FirstName"
-                        className="form-control col"
-                        value={childData.FirstName}
-                        onChange={handleInputChange}
-                        placeholder="שם פרטי"
-                        required
-                    />
-                </div>
-
-                <div className="row g-3">
-                    <label htmlFor="LastName" className="form-label col">שם משפחה</label>
-                    <input
-                        id="LastName"
-                        type="text"
-                        name="LastName"
-                        className="form-control col"
-                        value={childData.LastName}
-                        onChange={handleInputChange}
-                        placeholder="שם משפחה"
-                        required
-                    />
-                </div>
-
-                <div className="row g-3">
-                    <label htmlFor="Phone" className="form-label col">מספר טלפון</label>
-                    <input
-                        id="Phone"
-                        type="text"
-                        name="Phone"
-                        className="form-control col"
-                        value={childData.Phone}
-                        onChange={handleInputChange}
-                        placeholder="מספר טלפון"
-                        required
-                    />
-                </div>
+                {[
+                    { id: 'Id', label: 'מספר זהות', type: 'text', value: childData.Id },
+                    { id: 'FirstName', label: 'שם פרטי', type: 'text', value: childData.FirstName },
+                    { id: 'LastName', label: 'שם משפחה', type: 'text', value: childData.LastName },
+                    { id: 'Phone', label: 'מספר טלפון', type: 'text', value: childData.Phone },
+                    { id: 'BirthDate', label: 'תאריך לידה', type: 'date', value: childData.BirthDate },
+                    { id: 'City', label: 'עיר', type: 'text', value: childData.City },
+                    { id: 'Street', label: 'רחוב', type: 'text', value: childData.Street },
+                    { id: 'Building', label: 'בניין', type: 'text', value: childData.Building }
+                ].map(({ id, label, type, value }) => (
+                    <div className="row g-3" key={id}>
+                        <label htmlFor={id} className="form-label col">{label}</label>
+                        <input
+                            id={id}
+                            type={type}
+                            name={id}
+                            className="form-control col"
+                            value={value}
+                            onChange={handleInputChange}
+                            placeholder={label}
+                            required
+                        />
+                    </div>
+                ))}
 
                 <div className="row g-3">
                     <label htmlFor="challenges" className="form-label col">אתגר</label>
@@ -223,19 +145,6 @@ export default function AddChild() {
                 )}
 
                 <div className="row g-3">
-                    <label htmlFor="BirthDate" className="form-label col">תאריך לידה</label>
-                    <input
-                        id="BirthDate"
-                        type="date"
-                        name="BirthDate"
-                        className="form-control col"
-                        value={childData.BirthDate}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-
-                <div className="row g-3">
                     <label htmlFor="Image" className="form-label col">תמונה</label>
                     <input
                         id="Image"
@@ -243,48 +152,6 @@ export default function AddChild() {
                         name="Image"
                         className="form-control col"
                         onChange={handleFileChange}
-                    />
-                </div>
-
-                <div className="row g-3">
-                    <label htmlFor="City" className="form-label col">עיר</label>
-                    <input
-                        id="City"
-                        type="text"
-                        name="City"
-                        className="form-control col"
-                        value={childData.City}
-                        onChange={handleInputChange}
-                        placeholder="עיר"
-                        required
-                    />
-                </div>
-
-                <div className="row g-3">
-                    <label htmlFor="Street" className="form-label col">רחוב</label>
-                    <input
-                        id="Street"
-                        type="text"
-                        name="Street"
-                        className="form-control col"
-                        value={childData.Street}
-                        onChange={handleInputChange}
-                        placeholder="רחוב"
-                        required
-                    />
-                </div>
-
-                <div className="row g-3">
-                    <label htmlFor="Building" className="form-label col">בניין</label>
-                    <input
-                        id="Building"
-                        type="text"
-                        name="Building"
-                        className="form-control col"
-                        value={childData.Building}
-                        onChange={handleInputChange}
-                        placeholder="בניין"
-                        required
                     />
                 </div>
 
@@ -309,7 +176,6 @@ export default function AddChild() {
                     שלח
                 </button>
             </form>
-
         </div>
     );
 }

@@ -34,7 +34,7 @@ public class VolunteeringTasksController : ControllerBase
         return await _volunteeringTasksRepository.GetSingleAsync(id, email, password);
     }
     [HttpPost("{email}/{password}")]
-    public async Task<BlVolunteeringTask> PostAsync(PostTask entity, string email, string password)
+    public async Task<BlVolunteeringTask> PostAsync([FromBody]PostTask entity, string email, string password)
     {
         return await _volunteeringTasksRepository.PostAsync(entity, email, password);
     }

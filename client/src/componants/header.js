@@ -43,10 +43,6 @@ export default function Header() {
     return (
         <header className="navbar fixed-top navbar-expand-lg white" style={{ backgroundColor: myBackgroundColor, height: '11vh', width: '100vw', boxShadow: '5 5 10 rgba(0, 0, 0, 0.1)', borderRadius: "0 0 0 40px", borderWidth: "0 0 1.5px 1.5px", borderStyle: 'solid', borderColor: 'rgb(227, 200, 184)' }}>
             <div className="container-fluid"><img src={logo} alt='logo' height='100vh' style={{ float: 'right' }} /></div>
-            {/* <Link to = '/Tasks' style={{ textDecoration: 'none', textAlign: 'center', width: '3vw', borderRadius: "50px", borderWidth: "1.5px", borderStyle: 'solid', borderColor: 'rgb(227, 200, 184)', display: 'inline-block', padding: '10px' }}>משימות</Link> */}
-
-            <button onClick={() => '/Tasks'} style={{marginLeft:'50%', marginTop: '4vh' ,textAlign: 'center',width: '10vw', borderRadius: "50px",borderWidth: "1.5px",borderStyle: 'solid',borderColor: 'rgb(227, 200, 184)'}}>משימות</button>
-            {/* <button onClick={() => navigate('/Tasks')} style={{ textAlign: 'center',width: '3vw', borderRadius: "50px",borderWidth: "1.5px",borderStyle: 'solid',borderColor: 'rgb(227, 200, 184)'}}>משימות</button> */}
             <div className="d-flex" style={{ display: 'flex', alignItems: 'flex-end', float: 'left', height: '100', marginLeft: '10px', marginTop: '2.5vh' }}>
                 <div style={{ fontFamily: 'easy', fontSize: 'large', fontWeight: 'bold', width: '100px' }}>כאן כדי לתת יד</div>
                 <div className='user-details' style={{ textAlign: 'left', marginRight: '20px' }}>
@@ -59,6 +55,13 @@ export default function Header() {
                     </button>
                     {showPopover && (
                         <div className="popover">
+                            {Object.keys(userDetails).length === 0 && (
+                                <p>
+                                    <Link to="/log-in" style={{ textDecoration: 'none' }}>
+                                        לכניסה לאיזור האישי
+                                    </Link>
+                                </p>
+                            )}
                             {userDetails.child && (
                                 <p>{userDetails.child.firstName} {userDetails.child.lastName}</p>
                             )}
