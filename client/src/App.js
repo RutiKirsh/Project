@@ -10,6 +10,7 @@ import Tasks from './componants/tasks';
 import LogIn from './componants/logIn';
 import AddChild from './componants/addChild';
 import ChildTasks from './componants/child\'sTasks';
+// import Navigator from './componants/navigator';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <body style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
         <HomePage></HomePage>
         <LogIn></LogIn>
+        {/* <Navigator></Navigator> */}
         {/* <Tasks></Tasks> */}
         {/* <AddChild></AddChild> */}
         <ChildTasks></ChildTasks>
