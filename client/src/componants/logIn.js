@@ -50,12 +50,12 @@ export default function LogIn() {
                 borderColor: 'rgb(227, 200, 184)'
             }}>
                 <div class="row g-3">
-                    <label for="email" class="form-label col">אימייל</label>
+                    <label htmlFor="email" class="form-label col">אימייל</label>
                     <input id="email" type="email" class="form-control col" required name="email" value={user.email} onChange={handleInputChange} />
                 </div>
                 <br />
                 <div class="row g-3">
-                    <label for="password" class="form-label col">סיסמא</label>
+                    <label htmlFor="password" class="form-label col">סיסמא</label>
                     <input id="password" type="password" class="form-control col" required name="password" value={user.password} onChange={handleInputChange} />
                 </div>
                 <br />

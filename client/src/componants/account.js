@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ChildTasks from './child\'sTasks';
 import { logOut } from '../redux/actions/logOut';
@@ -66,6 +65,15 @@ export default function Account() {
                     כניסה
                 </button>
             )}
+            <br />
+            <br />
+            <button
+                    onClick={() => handleNavigation('/')}
+                    className="btn btn-primary"
+                    style={{ backgroundColor: 'lightgray', border: 'lightgray' }}
+                >
+                    לעמוד הבית
+                </button>
         </div>
     );
 }
